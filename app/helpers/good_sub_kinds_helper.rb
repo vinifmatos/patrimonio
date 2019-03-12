@@ -1,0 +1,2 @@
+module GoodSubKindsHelper
+end

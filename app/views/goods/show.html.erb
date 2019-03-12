@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @good.code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @good.description %>
+</p>
+
+<p>
+  <strong>Specification:</strong>
+  <%= @good.specification %>
+</p>
+
+<p>
+  <strong>Situation:</strong>
+  <%= @good.situation %>
+</p>
+
+<p>
+  <strong>Purchase value:</strong>
+  <%= @good.purchase_value %>
+</p>
+
+<p>
+  <strong>Purchase date:</strong>
+  <%= @good.purchase_date %>
+</p>
+
+<p>
+  <strong>Base date:</strong>
+  <%= @good.base_date %>
+</p>
+
+<%= link_to 'Edit', edit_good_path(@good) %> |
+<%= link_to 'Back', goods_path %>

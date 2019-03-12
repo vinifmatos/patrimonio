@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @good_category.description %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @good_category.active %>
+</p>
+
+<p>
+  <strong>Good sub kind:</strong>
+  <%= @good_category.good_sub_kind %>
+</p>
+
+<%= link_to 'Edit', edit_good_category_path(@good_category) %> |
+<%= link_to 'Back', good_categories_path %>

@@ -1,0 +1,32 @@
+<%= form_with(model: good_category, local: true) do |form| %>
+  <% if good_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(good_category.errors.count, "error") %> prohibited this good_category from being saved:</h2>
+
+      <ul>
+      <% good_category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="field">
+    <%= form.label :good_sub_kind_id %>
+    <%= form.text_field :good_sub_kind_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

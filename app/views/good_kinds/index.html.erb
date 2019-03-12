@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Good Kinds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @good_kinds.each do |good_kind| %>
+      <tr>
+        <td><%= good_kind.description %></td>
+        <td><%= good_kind.active %></td>
+        <td><%= link_to 'Show', good_kind %></td>
+        <td><%= link_to 'Edit', edit_good_kind_path(good_kind) %></td>
+        <td><%= link_to 'Destroy', good_kind, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Good Kind', new_good_kind_path %>

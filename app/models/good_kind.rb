@@ -1,0 +1,2 @@
+class GoodKind < ApplicationRecord
+end

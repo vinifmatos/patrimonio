@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Good Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Active</th>
+      <th>Good sub kind</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @good_categories.each do |good_category| %>
+      <tr>
+        <td><%= good_category.description %></td>
+        <td><%= good_category.active %></td>
+        <td><%= good_category.good_sub_kind %></td>
+        <td><%= link_to 'Show', good_category %></td>
+        <td><%= link_to 'Edit', edit_good_category_path(good_category) %></td>
+        <td><%= link_to 'Destroy', good_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Good Category', new_good_category_path %>
