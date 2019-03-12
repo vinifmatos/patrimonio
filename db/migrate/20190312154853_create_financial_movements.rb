@@ -4,7 +4,7 @@ class CreateFinancialMovements < ActiveRecord::Migration[5.2]
       t.references :good, foreign_key: true
       t.date :date
       t.integer :kind
-      t.decimal :amount, scale: 2
+      t.decimal :amount, precision: 15, scale: 2
 
       t.timestamps
     end

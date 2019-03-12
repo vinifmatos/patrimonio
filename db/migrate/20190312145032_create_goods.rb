@@ -7,7 +7,7 @@ class CreateGoods < ActiveRecord::Migration[5.2]
       t.string :description
       t.text :specification
       t.integer :situation
-      t.decimal :purchase_price, scale: 2
+      t.decimal :purchase_price, precision: 15, scale: 2
       t.date :purchase_date
       t.date :base_date
 
