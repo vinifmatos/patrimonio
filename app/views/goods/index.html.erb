@@ -1,7 +1,7 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
   <div class="row">
-    <h1><%= Good.model_name.human(count: 2) %></h1>
+    <h1><%= @goods.model_name.human(count: 2) %></h1>
     <div class="ml-auto mt-2">
       <%= link_to t('actions.new'), new_good_path, class: 'btn btn-success' %>
     </div>
@@ -27,7 +27,7 @@
             <td><%= good.code %></td>
             <td><%= link_to good.description, good %></td>
             <td><%= good.specification %></td>
-            <td><%= good.situation %></td>
+            <td><%= Good.t_situation good.situation %></td>
             <td><%= good.purchase_price %></td>
             <td><%= l(good.purchase_date) %></td>
             <td><%= l(good.base_date) %></td>

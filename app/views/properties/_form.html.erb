@@ -20,9 +20,9 @@
   <div class="form-actions">
     <%= form.submit class: 'btn btn-success'  %>
     <% if action_name == 'edit' %>
-      <%= link_to :back, property_path(property), class: 'btn btn-primary' %>
+      <%= link_to t('actions.back'), property_path(property), class: 'btn btn-primary' %>
     <% else %>
-      <%= link_to :back, properties_path, class: 'btn btn-primary' %>
+      <%= link_to t('actions.back'), properties_path, class: 'btn btn-primary' %>
     <% end %>
   </div>
 <% end %>

@@ -1,15 +1,14 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
-  <h1>Property Details</h1>
-  <%= link_to :back, properties_path, class: 'btn btn-primary' %>
-  <%= link_to :edit, edit_property_path(@property), class: 'btn btn-primary' %>
-  <%= link_to :delete, @property, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   <p>
-    <strong>Description:</strong>
+    <strong><%= Property.human_attribute_name(:description) %>:</strong>
     <%= @property.description %>
   </p>
   <p>
-    <strong>Active:</strong>
-    <%= @property.active %>
+    <strong><%= Property.human_attribute_name(:active) %>:</strong>
+    <%= t_active @property.active %>
   </p>
+  <%= link_to t('actions.back'), properties_path, class: 'btn btn-primary' %>
+  <%= link_to t('actions.edit'), edit_property_path(@property), class: 'btn btn-primary' %>
+  <%= link_to t('actions.destroy'), @property, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
 </div>
