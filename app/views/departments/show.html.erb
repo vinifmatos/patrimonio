@@ -1,19 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @department.description %>
-</p>
-
-<p>
-  <strong>Property:</strong>
-  <%= @department.property %>
-</p>
-
-<p>
-  <strong>Active:</strong>
-  <%= @department.active %>
-</p>
-
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+<div class="container">
+  <h1>Department Details</h1>
+  <%= link_to :back, departments_path, class: 'btn btn-primary' %>
+  <%= link_to :edit, edit_department_path(@department), class: 'btn btn-primary' %>
+  <%= link_to :delete, @department, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <p>
+    <strong>Description:</strong>
+    <%= @department.description %>
+  </p>
+  <p>
+    <strong>Property:</strong>
+    <%= @department.property.description %>
+  </p>
+  <p>
+    <strong>Active:</strong>
+    <%= @department.active %>
+  </p>
+</div>

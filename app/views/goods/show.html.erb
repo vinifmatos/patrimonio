@@ -1,39 +1,43 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Code:</strong>
-  <%= @good.code %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @good.description %>
-</p>
-
-<p>
-  <strong>Specification:</strong>
-  <%= @good.specification %>
-</p>
-
-<p>
-  <strong>Situation:</strong>
-  <%= @good.situation %>
-</p>
-
-<p>
-  <strong>Purchase value:</strong>
-  <%= @good.purchase_value %>
-</p>
-
-<p>
-  <strong>Purchase date:</strong>
-  <%= @good.purchase_date %>
-</p>
-
-<p>
-  <strong>Base date:</strong>
-  <%= @good.base_date %>
-</p>
-
-<%= link_to 'Edit', edit_good_path(@good) %> |
-<%= link_to 'Back', goods_path %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1>Goods Details</h1>
+  <%= link_to :back, goods_path, class: 'btn btn-primary' %>
+  <%= link_to :edit, edit_good_path(@good), class: 'btn btn-primary' %>
+  <%= link_to :delete, @good, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <p>
+    <strong>Code:</strong>
+    <%= @good.code %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @good.description %>
+  </p>
+  <p>
+    <strong>Specification:</strong>
+    <%= @good.specification %>
+  </p>
+  <p>
+    <strong>Situation:</strong>
+    <%= @good.situation %>
+  </p>
+  <p>
+    <strong>Purchase price:</strong>
+    <%= @good.purchase_price %>
+  </p>
+  <p>
+    <strong>Purchase date:</strong>
+    <%= @good.purchase_date %>
+  </p>
+  <p>
+    <strong>Base date:</strong>
+    <%= @good.base_date %>
+  </p>
+  <p>
+    <strong>Category:</strong>
+    <%= @good.good_category.description %>
+  </p>
+  <p>
+    <strong>Department:</strong>
+    <%= @good.department.description %>
+  </p>
+</div>

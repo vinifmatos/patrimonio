@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :financial_movement do
-    good { nil }
-    date { "2019-03-12" }
-    kind { 1 }
-    amount { "9.99" }
+    good
+    date { Faker::Date.between(300.days.ago, Date.today) }
+    kind { FinancialMovement.kinds.values.sample }
+    amount { Faker::Number.decimal(2, 1) }
   end
 end

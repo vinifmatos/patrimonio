@@ -1,6 +1,4 @@
-<h1>Editing Department</h1>
-
-<%= render 'form', department: @department %>
-
-<%= link_to 'Show', @department %> |
-<%= link_to 'Back', departments_path %>
+<div class="container">
+  <h1>Editing Department</h1>
+  <%= render 'form', department: @department, properties: @properties %>
+</div>

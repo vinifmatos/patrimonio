@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :movement do
-    good { nil }
-    department { nil }
-    date { "2019-03-12" }
-    kind { 1 }
+    good
+    department
+    date { Faker::Date.between(300.days.ago, Date.today) }
+    kind { Movement.kinds.values.sample }
   end
 end

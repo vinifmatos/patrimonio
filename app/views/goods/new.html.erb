@@ -1,5 +1,4 @@
 <div class="container">
   <h1>New Good</h1>
-  <%= render 'form', good: @good %>
-  <%= link_to 'Back', goods_path %>
+  <%= render 'form', good: @good, good_categories: @good_categories, departments: @departments %>
 </div>

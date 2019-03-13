@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :property do
-    description { "MyString" }
-    active { false }
+    description { Faker::Address.city }
+    active { [false, true].sample }
   end
 end

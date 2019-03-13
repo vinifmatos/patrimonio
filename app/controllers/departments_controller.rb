@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class DepartmentsController < ApplicationController
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
+  before_action :set_department, only: %i[show edit update destroy]
+  before_action :set_properties, only: %i[new edit]
 
   # GET /departments
   # GET /departments.json
   def index
-    @departments = Department.all
+    @departments = Department.all.includes(:property)
   end
 
   # GET /departments/1
   # GET /departments/1.json
-  def show
-  end
+  def show; end
 
   # GET /departments/new
   def new
@@ -18,8 +20,7 @@ class DepartmentsController < ApplicationController
   end
 
   # GET /departments/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /departments
   # POST /departments.json
@@ -62,13 +63,18 @@ class DepartmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_department
-      @department = Department.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def department_params
-      params.require(:department).permit(:description, :property_id, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_department
+    @department = Department.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def department_params
+    params.require(:department).permit(:description, :property_id, :active)
+  end
+
+  def set_properties
+    @properties = Property.all.map { |p| [p.description, p.id] }
+  end
 end

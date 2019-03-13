@@ -1,16 +1,19 @@
+# frozen_string_literal: true
+
 class GoodsController < ApplicationController
-  before_action :set_good, only: [:show, :edit, :update, :destroy]
+  before_action :set_good, only: %i[show edit update destroy]
+  before_action :set_good_categories, only: %i[new edit]
+  before_action :set_departments, only: %i[new edit]
 
   # GET /goods
   # GET /goods.json
   def index
-    @goods = Good.all
+    @goods = Good.all.includes(:good_category, :department)
   end
 
   # GET /goods/1
   # GET /goods/1.json
-  def show
-  end
+  def show; end
 
   # GET /goods/new
   def new
@@ -18,8 +21,7 @@ class GoodsController < ApplicationController
   end
 
   # GET /goods/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /goods
   # POST /goods.json
@@ -62,13 +64,32 @@ class GoodsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_good
-      @good = Good.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def good_params
-      params.require(:good).permit(:code, :description, :specification, :situation, :purchase_price, :purchase_date, :base_date)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_good
+    @good = Good.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def good_params
+    params.require(:good).permit(
+      :code,
+      :description,
+      :specification,
+      :situation,
+      :purchase_price,
+      :purchase_date,
+      :base_date,
+      :good_category_id,
+      :department_id
+    )
+  end
+
+  def set_good_categories
+    @good_categories = GoodCategory.all.map { |c| [c.description, c.id] }
+  end
+
+  def set_departments
+    @departments = Department.all.map { |d| [d.description, d.id] }
+  end
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :good_kind do
-    description { "MyString" }
-    active { false }
+    description { Faker::IndustrySegments.sector }
+    active { [true, false].sample }
   end
 end

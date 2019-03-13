@@ -1,5 +1,9 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
+  <h1>Property Details</h1>
+  <%= link_to :back, properties_path, class: 'btn btn-primary' %>
+  <%= link_to :edit, edit_property_path(@property), class: 'btn btn-primary' %>
+  <%= link_to :delete, @property, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   <p>
     <strong>Description:</strong>
     <%= @property.description %>
@@ -8,6 +12,4 @@
     <strong>Active:</strong>
     <%= @property.active %>
   </p>
-  <%= link_to 'Edit', edit_property_path(@property), class: 'btn btn-primary' %>
-  <%= link_to 'Back', properties_path, class: 'btn btn-primary' %>
 </div>

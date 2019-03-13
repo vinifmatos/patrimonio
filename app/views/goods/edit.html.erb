@@ -1,6 +1,4 @@
-<h1>Editing Good</h1>
-
-<%= render 'form', good: @good %>
-
-<%= link_to 'Show', @good %> |
-<%= link_to 'Back', goods_path %>
+<div class="container">
+  <h1>Editing Good</h1>
+  <%= render 'form', good: @good, good_categories: @good_categories, departments: @departments %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_154853) do
+ActiveRecord::Schema.define(version: 2019_03_13_012500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 2019_03_12_154853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "good_category_id"
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_goods_on_department_id"
     t.index ["good_category_id"], name: "index_goods_on_good_category_id"
   end
 
@@ -97,6 +99,7 @@ ActiveRecord::Schema.define(version: 2019_03_12_154853) do
   add_foreign_key "financial_movements", "goods"
   add_foreign_key "good_categories", "good_sub_kinds"
   add_foreign_key "good_sub_kinds", "good_kinds"
+  add_foreign_key "goods", "departments"
   add_foreign_key "goods", "good_categories"
   add_foreign_key "movements", "departments"
   add_foreign_key "movements", "goods"
