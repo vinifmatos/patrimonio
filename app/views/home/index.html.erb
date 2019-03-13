@@ -1,8 +1,20 @@
-<nav id="menu" class="nav flex-column">
-  <%= link_to :goods, goods_path, class: 'nav-link' %>
-  <%= link_to :kinds, good_kinds_path, class: 'nav-link' %>
-  <%= link_to :sub_kinds, good_sub_kinds_path, class: 'nav-link' %>
-  <%= link_to :categories, good_categories_path, class: 'nav-link' %>
-  <%= link_to :properties, properties_path, class: 'nav-link' %>
-  <%= link_to :departments, departments_path, class: 'nav-link' %>
-</nav>
+<ul id="menu" class="nav flex-column">
+  <li class="nav-item">
+    <%= link_to t(:goods), goods_path, class: 'nav-link' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t(:kinds), good_kinds_path, class: 'nav-link' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t(:sub_kinds), good_sub_kinds_path, class: 'nav-link' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t(:categories), good_categories_path, class: 'nav-link' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t(:properties), properties_path, class: 'nav-link' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t(:departments), departments_path, class: 'nav-link' %>
+  </li>
+</ul>

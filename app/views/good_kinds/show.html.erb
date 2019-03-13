@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @good_kind.description %>
-</p>
-
-<p>
-  <strong>Active:</strong>
-  <%= @good_kind.active %>
-</p>
-
-<%= link_to 'Edit', edit_good_kind_path(@good_kind) %> |
-<%= link_to 'Back', good_kinds_path %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <p>
+    <strong><%= GoodKind.human_attribute_name(:description) %>:</strong>
+    <%= @good_kind.description %>
+  </p>
+  <p>
+    <strong><%= GoodKind.human_attribute_name(:active) %>:</strong>
+    <%= t_active @good_kind.active %>
+  </p>
+  <%= link_to t('actions.back'), good_kinds_path, class: 'btn btn-primary' %>
+  <%= link_to t('actions.edit'), edit_good_kind_path(@good_kind), class: 'btn btn-primary' %>
+  <%= link_to t('actions.destroy'), @property, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
+</div>

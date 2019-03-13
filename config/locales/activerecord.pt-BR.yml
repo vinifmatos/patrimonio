@@ -1,0 +1,55 @@
+pt-BR:
+  activerecord:
+    models:
+      good:
+        one: Bem
+        other: Bens
+      good_category:
+        one: Categoria
+        other: Categorias
+      good_kind:
+        one: Tipo
+        other: Tipos
+      good_sub_kind:
+        one: Sub Tipo
+        other: Sub Tipos
+      department:
+        one: Departamento
+        other: Departamentos
+      property:
+        one: Propriedade
+        other: Propriedades
+    attributes:
+      good:
+        code: Código
+        description: Descrição
+        specification: Especificação
+        situation: Situação
+        purchase_price: Valor de Aquisição
+        purchase_date: Data de Aquisição
+        base_date: Data Base
+        department_id: Departamento
+        good_category_id: Categoria
+      good/situations:
+        active: Ativo
+        inactive: Inativo
+        borrowed: Emprestado
+        maintenance: Em Manutenção
+      good_category:
+        description: Descrição
+        active: Ativo
+        good_sub_kind_id: Sub Tipo
+      good_kind:
+        description: Descrição
+        active: Ativo
+      good_sub_kind:
+        description: Descrição
+        active: Ativo
+        good_kind_id: Tipo
+      department:
+        description: Descrição
+        active: Ativo
+        property_id: Propriedade
+      property:
+        description: Descrição
+        active: Ativo

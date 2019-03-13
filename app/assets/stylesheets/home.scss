@@ -34,8 +34,14 @@
 // ul li a:hover { background-color: #99c0ff}
 
 #menu {
-  border-right: 1px solid black;
+  border-right: 1px solid rgb(206, 212, 218);
+  border-top: 1px solid rgb(206, 212, 218);
   width: max-content;
   height: 100%;
-  border-color: rgb(206, 212, 218);
+  background-color: rgb(248, 249, 250);
+  // background-color: #c6e9ff;
+}
+
+#menu li {
+  border-bottom: 1px solid  rgb(206, 212, 218);
 }

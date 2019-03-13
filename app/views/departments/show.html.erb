@@ -1,18 +1,17 @@
 <div class="container">
-  <h1>Department Details</h1>
-  <%= link_to :back, departments_path, class: 'btn btn-primary' %>
-  <%= link_to :edit, edit_department_path(@department), class: 'btn btn-primary' %>
-  <%= link_to :delete, @department, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   <p>
-    <strong>Description:</strong>
+    <strong><%= Department.human_attribute_name(:description) %>:</strong>
     <%= @department.description %>
   </p>
   <p>
-    <strong>Property:</strong>
+    <strong><%= Department.human_attribute_name(:property) %>:</strong>
     <%= @department.property.description %>
   </p>
   <p>
-    <strong>Active:</strong>
-    <%= @department.active %>
+    <strong><%= Department.human_attribute_name(:active) %>:</strong>
+    <%= t_active @department.active %>
   </p>
+  <%= link_to t('actions.back'), departments_path, class: 'btn btn-primary' %>
+  <%= link_to t('actions.edit'), edit_department_path(@department), class: 'btn btn-primary' %>
+  <%= link_to t('actions.destroy'), @department, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
 </div>

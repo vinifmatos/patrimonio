@@ -1,24 +1,24 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
   <div class="row">
-    <h1>Properties</h1>
+    <h1><%= @properties.model_name.human(count: 2) %></h1>
     <div class="ml-auto mt-2">
-      <%= link_to 'New Property', new_property_path, class: 'btn btn-success' %>
+      <%= link_to t('actions.new'), new_property_path, class: 'btn btn-success' %>
     </div>
   </div>
   <div class="row">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Description</th>
-          <th>Active</th>
+          <th><%= @properties.human_attribute_name(:description) %></th>
+          <th><%= @properties.human_attribute_name(:active) %></th>
         </tr>
       </thead>
       <tbody>
         <% @properties.each do |property| %>
           <tr>
             <td><%= link_to property.description, property %></td>
-            <td><%= property.active %></td>
+            <td><%= t_active property.active %></td>
           </tr>
         <% end %>
       </tbody>

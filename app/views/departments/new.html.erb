@@ -1,4 +1,4 @@
 <div class="container">
-  <h1>New Department</h1>
+  <h1><%= t('actions.new') %> <%= @department.model_name.human %></h1>
   <%= render 'form', department: @department, properties: @properties %>
 </div>

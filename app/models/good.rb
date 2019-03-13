@@ -9,6 +9,10 @@ class Good < ApplicationRecord
   after_create :create_initial_movement
   after_create :create_initial_financial_movement
 
+  def self.t_situation(situation)
+    I18n.t "activerecord.attributes.good/situations.#{situation}"
+  end
+
   def create_initial_movement
     Movement.create(
       good_id: id,

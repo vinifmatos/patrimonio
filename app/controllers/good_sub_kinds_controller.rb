@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class GoodSubKindsController < ApplicationController
-  before_action :set_good_sub_kind, only: [:show, :edit, :update, :destroy]
+  before_action :set_good_sub_kind, only: %i[show edit update destroy]
+  before_action :set_good_kinds, only: %i[new edit]
 
   # GET /good_sub_kinds
   # GET /good_sub_kinds.json
   def index
-    @good_sub_kinds = GoodSubKind.all
+    @good_sub_kinds = GoodSubKind.all.includes(:good_kind)
   end
 
   # GET /good_sub_kinds/1
   # GET /good_sub_kinds/1.json
-  def show
-  end
+  def show; end
 
   # GET /good_sub_kinds/new
   def new
@@ -18,8 +20,7 @@ class GoodSubKindsController < ApplicationController
   end
 
   # GET /good_sub_kinds/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /good_sub_kinds
   # POST /good_sub_kinds.json
@@ -62,13 +63,18 @@ class GoodSubKindsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_good_sub_kind
-      @good_sub_kind = GoodSubKind.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def good_sub_kind_params
-      params.require(:good_sub_kind).permit(:description, :active, :good_kind_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_good_sub_kind
+    @good_sub_kind = GoodSubKind.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def good_sub_kind_params
+    params.require(:good_sub_kind).permit(:description, :active, :good_kind_id)
+  end
+
+  def set_good_kinds
+    @good_kinds = GoodKind.all.select(:id, :description).map { |x| [x.description, x.id] }
+  end
 end

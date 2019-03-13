@@ -1,24 +1,24 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
   <div class="row">
-    <h1>Goods</h1>
+    <h1><%= Good.model_name.human(count: 2) %></h1>
     <div class="ml-auto mt-2">
-      <%= link_to 'New Good', new_good_path, class: 'btn btn-success' %>
+      <%= link_to t('actions.new'), new_good_path, class: 'btn btn-success' %>
     </div>
   </div>
   <div class="row">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Code</th>
-          <th>Description</th>
-          <th>Specification</th>
-          <th>Situation</th>
-          <th>Purchase price</th>
-          <th>Purchase date</th>
-          <th>Base date</th>
-          <th>Category</th>
-          <th>Department</th>
+          <th><%= @goods.human_attribute_name(:code) %></th>
+          <th><%= @goods.human_attribute_name(:description) %></th>
+          <th><%= @goods.human_attribute_name(:specification) %></th>
+          <th><%= @goods.human_attribute_name(:situation) %></th>
+          <th><%= @goods.human_attribute_name(:purchase_price) %></th>
+          <th><%= @goods.human_attribute_name(:purchase_date) %></th>
+          <th><%= @goods.human_attribute_name(:base_date) %></th>
+          <th><%= @goods.human_attribute_name(:good_category_id) %></th>
+          <th><%= @goods.human_attribute_name(:department_id) %></th>
         </tr>
       </thead>
       <tbody>
@@ -29,8 +29,8 @@
             <td><%= good.specification %></td>
             <td><%= good.situation %></td>
             <td><%= good.purchase_price %></td>
-            <td><%= good.purchase_date %></td>
-            <td><%= good.base_date %></td>
+            <td><%= l(good.purchase_date) %></td>
+            <td><%= l(good.base_date) %></td>
             <td><%= good.good_category.description %></td>
             <td><%= good.department.description %></td>
           </tr>

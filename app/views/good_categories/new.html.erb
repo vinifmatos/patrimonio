@@ -1,5 +1,4 @@
-<h1>New Good Category</h1>
-
-<%= render 'form', good_category: @good_category %>
-
-<%= link_to 'Back', good_categories_path %>
+<div class=container>
+  <h1><%= t('actions.new') %> <%= GoodCategory.model_name.human %></h1>
+  <%= render 'form', good_category: @good_category, sub_kinds: @sub_kinds %>
+</div>

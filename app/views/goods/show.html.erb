@@ -1,43 +1,42 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
-  <h1>Goods Details</h1>
-  <%= link_to :back, goods_path, class: 'btn btn-primary' %>
-  <%= link_to :edit, edit_good_path(@good), class: 'btn btn-primary' %>
-  <%= link_to :delete, @good, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   <p>
-    <strong>Code:</strong>
+    <strong><%= Good.human_attribute_name(:code) %>:</strong>
     <%= @good.code %>
   </p>
   <p>
-    <strong>Description:</strong>
+    <strong><%= Good.human_attribute_name(:description) %>:</strong>
     <%= @good.description %>
   </p>
   <p>
-    <strong>Specification:</strong>
+    <strong><%= Good.human_attribute_name(:specification) %>:</strong>
     <%= @good.specification %>
   </p>
   <p>
-    <strong>Situation:</strong>
-    <%= @good.situation %>
+    <strong><%= Good.human_attribute_name(:situation) %>:</strong>
+    <%= Good.t_situation @good.situation %>
   </p>
   <p>
-    <strong>Purchase price:</strong>
+    <strong><%= Good.human_attribute_name(:purchase_price) %>:</strong>
     <%= @good.purchase_price %>
   </p>
   <p>
-    <strong>Purchase date:</strong>
+    <strong><%= Good.human_attribute_name(:purchase_date) %>:</strong>
     <%= @good.purchase_date %>
   </p>
   <p>
-    <strong>Base date:</strong>
+    <strong><%= Good.human_attribute_name(:base_date) %>:</strong>
     <%= @good.base_date %>
   </p>
   <p>
-    <strong>Category:</strong>
+    <strong><%= Good.human_attribute_name(:good_category_id) %>:</strong>
     <%= @good.good_category.description %>
   </p>
   <p>
-    <strong>Department:</strong>
+    <strong><%= Good.human_attribute_name(:department_id) %>:</strong>
     <%= @good.department.description %>
   </p>
+  <%= link_to t('actions.back'), goods_path, class: 'btn btn-primary' %>
+  <%= link_to t('actions.edit'), edit_good_path(@good), class: 'btn btn-primary' %>
+  <%= link_to t('actions.destroy'), @good, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
 </div>

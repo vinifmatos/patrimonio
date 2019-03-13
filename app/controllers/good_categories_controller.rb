@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class GoodCategoriesController < ApplicationController
-  before_action :set_good_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_good_category, only: %i[show edit update destroy]
+  before_action :set_sub_kinds, only: %i[new edit]
 
   # GET /good_categories
   # GET /good_categories.json
@@ -9,8 +12,7 @@ class GoodCategoriesController < ApplicationController
 
   # GET /good_categories/1
   # GET /good_categories/1.json
-  def show
-  end
+  def show; end
 
   # GET /good_categories/new
   def new
@@ -18,8 +20,7 @@ class GoodCategoriesController < ApplicationController
   end
 
   # GET /good_categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /good_categories
   # POST /good_categories.json
@@ -62,13 +63,18 @@ class GoodCategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_good_category
-      @good_category = GoodCategory.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def good_category_params
-      params.require(:good_category).permit(:description, :active, :good_sub_kind_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_good_category
+    @good_category = GoodCategory.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def good_category_params
+    params.require(:good_category).permit(:description, :active, :good_sub_kind_id)
+  end
+
+  def set_sub_kinds
+    @sub_kinds = GoodSubKind.all.select(:id, :description).map { |x| [x.description, x.id] }
+  end
 end

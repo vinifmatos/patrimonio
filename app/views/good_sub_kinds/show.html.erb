@@ -1,19 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @good_sub_kind.description %>
-</p>
-
-<p>
-  <strong>Active:</strong>
-  <%= @good_sub_kind.active %>
-</p>
-
-<p>
-  <strong>Good kind:</strong>
-  <%= @good_sub_kind.good_kind %>
-</p>
-
-<%= link_to 'Edit', edit_good_sub_kind_path(@good_sub_kind) %> |
-<%= link_to 'Back', good_sub_kinds_path %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <p>
+    <strong><%= GoodSubKind.human_attribute_name(:description) %>:</strong>
+    <%= @good_sub_kind.description %>
+  </p>
+  <p>
+    <strong><%= GoodSubKind.human_attribute_name(:active) %>:</strong>
+    <%= t_active @good_sub_kind.active %>
+  </p>
+  <p>
+    <strong><%= GoodSubKind.human_attribute_name(:good_kind_id) %>:</strong>
+    <%= @good_sub_kind.good_kind.description %>
+  </p>
+  <%= link_to t('actions.back'), good_sub_kinds_path, class: 'btn btn-primary' %>
+  <%= link_to t('actions.edit'), edit_good_sub_kind_path(@good_sub_kind), class: 'btn btn-primary' %>
+  <%= link_to t('actions.destroy'), @good_sub_kind, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
+</div>
