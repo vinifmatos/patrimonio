@@ -14,7 +14,7 @@
   )
 end
 
-%w[initial depreciation inactivation].each do |x|
+%w[incorporation borrowing transference inactivation maintence].each do |x|
   MovementKind.create(
     description: x
   )

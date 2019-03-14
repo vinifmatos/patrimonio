@@ -30,16 +30,22 @@ pt-BR:
         code: Código
         description: Descrição
         specification: Especificação
-        situation: Situação
+        good_situation_id: Situação
         purchase_price: Valor de Aquisição
         purchase_date: Data de Aquisição
         base_date: Data Base
         department_id: Departamento
         good_category_id: Categoria
       movement/kinds:
+        incorporation: Incorporação
+        borrowing: Empréstimo
+        inactivation: Desativação
+        transference: Transferência
+        maintence: Manutenção
+      financial_movement/kinds:
         initial: Inicial
         depreciation: Depreciação
-        inactivation: Desativação
+        revaluation: Reavalição
       good/situations:
         active: Ativo
         inactive: Inativo

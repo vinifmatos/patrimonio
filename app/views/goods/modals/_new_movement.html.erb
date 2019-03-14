@@ -1,0 +1,48 @@
+<div class="modal fade" id="new-movement-modal" tabindex="-1" role="dialog" aria-labelledby="new-movement-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="new-movement-modal-label">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with(model: [good, Movement.new], remote: true, id: 'movement-form') do |form| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= form.label :date %>
+            <%= form.date_select :date, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= form.label :department_id %>
+            <%= form.select :department_id, grouped_options_for_select(departments), { prompt: :prompt_text }, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= form.label :movement_kind_id %>
+            <%= form.select :movement_kind_id, movement_kids, { prompt: :prompt_text }, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="actions">
+            <%= form.submit class: 'btn btn-success' %>
+            <%= button_tag t('actions.back'), class: 'btn btn-primary', data: { dismiss: 'modal' } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      // $("#movement-form").on("ajax:success", function(event) {
+      //   [data, status, xhr] = event.detail
+      //   console.log(xhr.responseText)
+      //   // $('#movements-table > tbody').append(xhr.responseText)
+      //   // $('#new-movement-modal').modal('hide')
+      // });
+      $("#movement-form").on("ajax:error", function(event) {
+        [data, status, xhr] = event.detail
+        console.log(xhr.responseText)
+      });
+    });
+  </script>
+</div>

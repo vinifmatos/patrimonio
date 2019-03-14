@@ -1,19 +1,32 @@
 # frozen_string_literal: true
 
 class GoodsController < ApplicationController
-  before_action :set_good, only: %i[show edit update destroy]
+  before_action :set_good, only: %i[edit update destroy]
   before_action :set_good_categories, only: %i[new edit]
   before_action :set_departments, only: %i[new edit]
 
   # GET /goods
   # GET /goods.json
   def index
-    @goods = Good.all.includes(:good_category, :department)
+    @goods = Good.all.includes(:good_category, :department, :good_situation)
   end
 
   # GET /goods/1
   # GET /goods/1.json
-  def show; end
+  def show
+    @good = Good.includes(
+      :good_situation,
+      movements: { department: :property },
+      good_category: { good_sub_kind: :good_kind },
+      financial_movements: :financial_movement_kind
+    ).find(params[:id])
+
+    @departments = Property.all.includes(:departments).map do |p|
+      [p.description, p.departments.map { |d| [d.description, d.id] }]
+    end
+
+    @movement_kids = MovementKind.all.select(:id, :description).map { |k| [MovementKind.t(k.description), k.id] }
+  end
 
   # GET /goods/new
   def new

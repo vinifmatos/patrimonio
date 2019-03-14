@@ -12,11 +12,8 @@
         <tr>
           <th><%= @goods.human_attribute_name(:code) %></th>
           <th><%= @goods.human_attribute_name(:description) %></th>
-          <th><%= @goods.human_attribute_name(:specification) %></th>
-          <th><%= @goods.human_attribute_name(:situation) %></th>
           <th><%= @goods.human_attribute_name(:purchase_price) %></th>
           <th><%= @goods.human_attribute_name(:purchase_date) %></th>
-          <th><%= @goods.human_attribute_name(:base_date) %></th>
           <th><%= @goods.human_attribute_name(:good_category_id) %></th>
           <th><%= @goods.human_attribute_name(:department_id) %></th>
         </tr>
@@ -26,11 +23,8 @@
           <tr>
             <td><%= good.code %></td>
             <td><%= link_to good.description, good %></td>
-            <td><%= good.specification %></td>
-            <td><%= Good.t_situation good.situation %></td>
-            <td><%= good.purchase_price %></td>
+            <td><%= number_with_precision(good.purchase_price, precision: 2) %></td>
             <td><%= l(good.purchase_date) %></td>
-            <td><%= l(good.base_date) %></td>
             <td><%= good.good_category.description %></td>
             <td><%= good.department.description %></td>
           </tr>

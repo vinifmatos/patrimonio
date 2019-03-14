@@ -13,10 +13,20 @@
   </ul>
   <div class="tab-content" id="good_tab_content">
     <%= render 'goods/show_tabs/register', good: @good %>
-    <%= render 'goods/show_tabs/movements', good: @good, movements: @good.movements.includes(:department, :movement_kind) %>
-    <%= render 'goods/show_tabs/financial_movements', good: @good %>
+    <%= render 'goods/show_tabs/movements', good: @good, movements: @good.movements, departments: @departments, movement_kids: @movement_kids %>
+    <%= render 'goods/show_tabs/financial_movements', good: @good, financial_movements: @good.financial_movements %>
   </div>
-  <%= link_to t('actions.back'), goods_path, class: 'btn btn-primary' %>
-  <%= link_to t('actions.edit'), edit_good_path(@good), class: 'btn btn-primary' %>
-  <%= link_to t('actions.destroy'), @good, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
 </div>
+<script>
+  $(document).ready(function() {
+    let url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    }
+  
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+  })
+</script>

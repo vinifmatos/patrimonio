@@ -1,1 +1,22 @@
-<div class="tab-pane fade" id="financial-movements" role="tabpanel" aria-labelledby="financial-movements-tab">...</div>
+<div class="tab-pane fade" id="financial-movements" role="tabpanel" aria-labelledby="financial-movements-tab">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th><%= financial_movements.human_attribute_name(:code) %></th>
+        <th><%= financial_movements.human_attribute_name(:date) %></th>
+        <th><%= financial_movements.human_attribute_name(:financial_movement_kind_id) %></th>
+        <th><%= financial_movements.human_attribute_name(:amount) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% financial_movements.each do |financial_movement| %>
+        <tr>
+          <td><%= financial_movement.code %></td>
+          <td><%= l financial_movement.date %></td>
+          <td><%= FinancialMovementKind.t financial_movement.financial_movement_kind.description %></td>
+          <td><%= number_with_precision(financial_movement.amount, precision: 2) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

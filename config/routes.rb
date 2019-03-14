@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   resources :good_categories
   resources :good_sub_kinds
   resources :good_kinds
-  resources :goods
+  resources :goods do
+    resources :movements, only: :create
+  end
 end
