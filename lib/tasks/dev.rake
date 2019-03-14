@@ -15,6 +15,6 @@ namespace :dev do
     `rails db:drop db:create db:migrate`
 
     puts 'Criando goods...'
-    FactoryBot.create_list(:good, 30)
+    FactoryBot.create_list(:good_full, 30)
   end
 end

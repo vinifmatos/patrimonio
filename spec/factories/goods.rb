@@ -2,14 +2,25 @@
 
 FactoryBot.define do
   factory :good do
-    code { 1 }
+    sequence(:code) { |n| n }
     description { Faker::Commerce.product_name }
     specification { Faker::Lorem.paragraph_by_chars(256, false) }
     purchase_price { Faker::Commerce.price }
     purchase_date { Faker::Date.between(60.days.ago, Date.today) }
-    base_date { Faker::Date.between(Date.today, 15.days.after) }
+    base_date { Faker::Date.between(purchase_date, purchase_date.next_day(15)) }
     situation { Good.situations.values.sample }
-    department
-    good_category
+
+    factory :good_with_department do
+      department
+    end
+
+    factory :good_with_category do
+      good_category
+    end
+
+    factory :good_full do
+      department
+      good_category
+    end
   end
 end
