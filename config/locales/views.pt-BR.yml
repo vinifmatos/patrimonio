@@ -1,0 +1,6 @@
+pt-BR:
+  views:
+    goods:
+      register: Cadastro
+      financial_movements: Movimentação Financeira
+      movements: Movimentação

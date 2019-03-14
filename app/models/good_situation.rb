@@ -1,0 +1,2 @@
+class GoodSituation < ApplicationRecord
+end

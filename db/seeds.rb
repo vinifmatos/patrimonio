@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -5,3 +7,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+%w[active inactive borrowed maintenance].each do |x|
+  GoodSituation.create(
+    description: x
+  )
+end
+
+%w[initial depreciation inactivation].each do |x|
+  MovementKind.create(
+    description: x
+  )
+end
+
+%w[initial revaluation depreciation].each do |x|
+  FinancialMovementKind.create(
+    description: x
+  )
+end

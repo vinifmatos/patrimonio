@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Good < ApplicationRecord
-  enum situation: %i[active inactive borrowed maintenance]
   belongs_to :good_category
   belongs_to :department
+  belongs_to :good_situation
   has_many :movements
   has_many :financial_movements
   after_create :create_initial_movement
@@ -18,7 +18,7 @@ class Good < ApplicationRecord
       good_id: id,
       department_id: department_id,
       date: Time.now,
-      kind: :initial
+      movement_kind_id: 1
     )
   end
 
@@ -26,7 +26,7 @@ class Good < ApplicationRecord
     FinancialMovement.create(
       good_id: id,
       date: Time.now,
-      kind: :initial,
+      financial_movement_kind_id: 1,
       amount: purchase_price
     )
   end

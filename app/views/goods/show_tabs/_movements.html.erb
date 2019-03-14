@@ -1,0 +1,22 @@
+<div class="tab-pane fade" id="movements" role="tabpanel" aria-labelledby="movements-tab">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th><%= movements.human_attribute_name(:code) %></th>
+        <th><%= movements.human_attribute_name(:date) %></th>
+        <th><%= movements.human_attribute_name(:movement_kind_id) %></th>
+        <th><%= movements.human_attribute_name(:department_id) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% movements.each do |movement| %>
+        <tr>
+          <td><%= movement.code %></td>
+          <td><%= l movement.date %></td>
+          <td><%= MovementKind.t movement.movement_kind.description %></td>
+          <td><%= movement.department.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

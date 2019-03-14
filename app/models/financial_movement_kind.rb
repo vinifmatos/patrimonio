@@ -1,0 +1,2 @@
+class FinancialMovementKind < ApplicationRecord
+end

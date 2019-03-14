@@ -5,6 +5,6 @@ FactoryBot.define do
     good
     department
     date { Faker::Date.between(300.days.ago, Date.today) }
-    kind { Movement.kinds.values.sample }
+    movement_kind { MovementKind.all.sample }
   end
 end

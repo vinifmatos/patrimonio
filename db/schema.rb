@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_012500) do
+ActiveRecord::Schema.define(version: 2019_03_14_030707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,13 +24,21 @@ ActiveRecord::Schema.define(version: 2019_03_13_012500) do
     t.index ["property_id"], name: "index_departments_on_property_id"
   end
 
+  create_table "financial_movement_kinds", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "financial_movements", force: :cascade do |t|
     t.bigint "good_id"
     t.date "date"
-    t.integer "kind"
     t.decimal "amount", precision: 15, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "financial_movement_kind_id"
+    t.integer "code"
+    t.index ["financial_movement_kind_id"], name: "index_financial_movements_on_financial_movement_kind_id"
     t.index ["good_id"], name: "index_financial_movements_on_good_id"
   end
 
@@ -50,6 +58,12 @@ ActiveRecord::Schema.define(version: 2019_03_13_012500) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "good_situations", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "good_sub_kinds", force: :cascade do |t|
     t.string "description"
     t.boolean "active"
@@ -63,7 +77,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_012500) do
     t.integer "code"
     t.string "description"
     t.text "specification"
-    t.integer "situation"
     t.decimal "purchase_price", precision: 15, scale: 2
     t.date "purchase_date"
     t.date "base_date"
@@ -71,19 +84,29 @@ ActiveRecord::Schema.define(version: 2019_03_13_012500) do
     t.datetime "updated_at", null: false
     t.bigint "good_category_id"
     t.bigint "department_id"
+    t.bigint "good_situation_id"
     t.index ["department_id"], name: "index_goods_on_department_id"
     t.index ["good_category_id"], name: "index_goods_on_good_category_id"
+    t.index ["good_situation_id"], name: "index_goods_on_good_situation_id"
+  end
+
+  create_table "movement_kinds", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "movements", force: :cascade do |t|
     t.bigint "good_id"
     t.bigint "department_id"
     t.date "date"
-    t.integer "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "movement_kind_id"
+    t.integer "code"
     t.index ["department_id"], name: "index_movements_on_department_id"
     t.index ["good_id"], name: "index_movements_on_good_id"
+    t.index ["movement_kind_id"], name: "index_movements_on_movement_kind_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -96,12 +119,15 @@ ActiveRecord::Schema.define(version: 2019_03_13_012500) do
   end
 
   add_foreign_key "departments", "properties"
+  add_foreign_key "financial_movements", "financial_movement_kinds"
   add_foreign_key "financial_movements", "goods"
   add_foreign_key "good_categories", "good_sub_kinds"
   add_foreign_key "good_sub_kinds", "good_kinds"
   add_foreign_key "goods", "departments"
   add_foreign_key "goods", "good_categories"
+  add_foreign_key "goods", "good_situations"
   add_foreign_key "movements", "departments"
   add_foreign_key "movements", "goods"
+  add_foreign_key "movements", "movement_kinds"
   add_foreign_key "properties", "goods"
 end

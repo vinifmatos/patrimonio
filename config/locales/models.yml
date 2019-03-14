@@ -19,6 +19,12 @@ pt-BR:
       property:
         one: Propriedade
         other: Propriedades
+      movement:
+        one: Movimento
+        other: Movimentos
+      financial_movement:
+        one: Movimento Financeiro
+        other: Movimentos Financeiros
     attributes:
       good:
         code: Código
@@ -30,6 +36,10 @@ pt-BR:
         base_date: Data Base
         department_id: Departamento
         good_category_id: Categoria
+      movement/kinds:
+        initial: Inicial
+        depreciation: Depreciação
+        inactivation: Desativação
       good/situations:
         active: Ativo
         inactive: Inativo
@@ -53,3 +63,13 @@ pt-BR:
       property:
         description: Descrição
         active: Ativo
+      movement:
+        date: Data
+        movement_kind_id: Tipo
+        department_id: Departamento
+        code: Código
+      financial_movement:
+        date: Data
+        financial_movement_kind_id: Tipo
+        amount: Valor
+        code: Código

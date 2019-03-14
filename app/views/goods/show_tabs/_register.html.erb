@@ -1,0 +1,38 @@
+<div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
+  <p>
+    <strong><%= Good.human_attribute_name(:code) %>:</strong>
+    <%= @good.code %>
+  </p>
+  <p>
+    <strong><%= Good.human_attribute_name(:description) %>:</strong>
+    <%= @good.description %>
+  </p>
+  <p>
+    <strong><%= Good.human_attribute_name(:specification) %>:</strong>
+    <%= @good.specification %>
+  </p>
+  <p>
+    <strong><%= Good.human_attribute_name(:situation) %>:</strong>
+    <%= Good.t_situation @good.good_situation.description %>
+  </p>
+  <p>
+    <strong><%= Good.human_attribute_name(:purchase_price) %>:</strong>
+    <%= @good.purchase_price %>
+  </p>
+  <p>
+    <strong><%= Good.human_attribute_name(:purchase_date) %>:</strong>
+    <%= l @good.purchase_date %>
+  </p>
+  <p>
+    <strong><%= Good.human_attribute_name(:base_date) %>:</strong>
+    <%= l @good.base_date %>
+  </p>
+  <p>
+    <strong><%= Good.human_attribute_name(:good_category_id) %>:</strong>
+    <%= @good.good_category.description %>
+  </p>
+  <p>
+    <strong><%= Good.human_attribute_name(:department_id) %>:</strong>
+    <%= @good.department.description %>
+  </p>
+</div>
