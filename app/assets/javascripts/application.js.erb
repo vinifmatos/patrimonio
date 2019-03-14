@@ -16,4 +16,11 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require bootstrap-datepicker
 //= require_tree .
+$(document).ready(function () {
+  $('.datepicker').datepicker({
+    todayBtn: "linked",
+    language: "<%= I18n.locale %>"
+  });
+});
