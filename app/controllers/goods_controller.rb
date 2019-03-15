@@ -4,6 +4,7 @@ class GoodsController < ApplicationController
   before_action :set_good, only: %i[edit update destroy]
   before_action :set_good_categories, only: %i[new edit]
   before_action :set_departments, only: %i[new edit]
+  before_action :set_situations, only: %i[new edit]
 
   # GET /goods
   # GET /goods.json
@@ -104,5 +105,9 @@ class GoodsController < ApplicationController
 
   def set_departments
     @departments = Department.all.map { |d| [d.description, d.id] }
+  end
+
+  def set_situations
+    @situations = GoodSituation.all.map { |s| [GoodSituation.t(s.description), s.id] }
   end
 end
