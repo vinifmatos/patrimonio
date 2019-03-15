@@ -19,8 +19,14 @@
 //= require bootstrap-datepicker
 //= require_tree .
 $(document).ready(function () {
+  $('#btn-datepicker').on('click', function () {
+    $('.datepicker').datepicker('show')
+  })
   $('.datepicker').datepicker({
     todayBtn: "linked",
-    language: "<%= I18n.locale %>"
-  });
+    language: "<%= I18n.locale %>",
+    showOnFocus: "false",
+    autoclose: "true",
+    todayHighlight: 'true'
+  })
 });
