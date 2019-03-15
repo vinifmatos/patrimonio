@@ -20,9 +20,9 @@
 //= require_tree .
 $(document).on("turbolinks:load", function () {
   $('#btn-datepicker').on('click', function () {
-    $('.datepicker').datepicker('show')
+    $('.datepicker-input').datepicker('show')
   })
-  $('.datepicker').datepicker({
+  $('.datepicker-input').datepicker({
     todayBtn: "linked",
     language: "<%= I18n.locale %>",
     showOnFocus: "false",

@@ -11,21 +11,31 @@
         <div class="modal-body">
           <div class="form-group">
             <%= form.label :date %>
-            <%= datepicker_field(form, :date, { required: true }) %>
+            <%= datepicker_field(form, :date, { required: true }) do %>
+              <div class='invalid-feedback'>
+                <%= t('views.validations.required') %>
+              </div>
+            <% end %>
           </div>
           <div class="form-group">
             <%= form.label :department_id %>
             <%= form.select :department_id, grouped_options_for_select(departments), { prompt: :prompt_text }, class: 'form-control', required: true %>
+            <div class='invalid-feedback'>
+              <%= t('views.validations.required') %>
+            </div>
           </div>
           <div class="form-group">
             <%= form.label :movement_kind_id %>
             <%= form.select :movement_kind_id, movement_kids, { prompt: :prompt_text }, class: 'form-control', required: true %>
+            <div class='invalid-feedback'>
+              <%= t('views.validations.required') %>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
           <div class="actions">
-            <%= form.submit class: 'btn btn-success' %>
             <%= button_tag t('views.actions.back'), class: 'btn btn-primary', data: { dismiss: 'modal' } %>
+            <%= form.submit class: 'btn btn-success' %>
           </div>
         </div>
       <% end %>

@@ -10,3 +10,5 @@ pt-BR:
     active:
       true: Sim
       false: Não
+    validations:
+      required: O preenchimento deste campo é obrigatório
