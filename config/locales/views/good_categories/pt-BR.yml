@@ -1,0 +1,7 @@
+pt-BR:
+  views:
+    good_categories:
+      new:
+        title: Nova Categoria
+      edit:
+        title: Editar Categoria

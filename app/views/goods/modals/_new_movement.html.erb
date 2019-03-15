@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="new-movement-modal-label">Modal title</h5>
+        <h5 class="modal-title" id="new-movement-modal-label"><%= t('views.movements.new.title') %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -25,7 +25,7 @@
         <div class="modal-footer">
           <div class="actions">
             <%= form.submit class: 'btn btn-success' %>
-            <%= button_tag t('actions.back'), class: 'btn btn-primary', data: { dismiss: 'modal' } %>
+            <%= button_tag t('views.actions.back'), class: 'btn btn-primary', data: { dismiss: 'modal' } %>
           </div>
         </div>
       <% end %>

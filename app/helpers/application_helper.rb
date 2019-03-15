@@ -2,7 +2,7 @@
 
 module ApplicationHelper
   def t_active(active)
-    I18n.t "active.#{active}"
+    I18n.t "views.active.#{active}"
   end
 
   def datepicker_field(form, field)

@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      good:
+        one: Bem
+        other: Bens
+    attributes:
+      good:
+        code: Código
+        description: Descrição
+        specification: Especificação
+        good_situation_id: Situação
+        purchase_price: Valor de Aquisição
+        purchase_date: Data de Aquisição
+        base_date: Data Base
+        department_id: Departamento
+        good_category_id: Categoria
+      good/situations:
+        active: Ativo
+        inactive: Inativo
+        borrowed: Emprestado
+        maintenance: Em Manutenção

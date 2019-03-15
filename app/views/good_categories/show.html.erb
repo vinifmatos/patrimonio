@@ -12,7 +12,7 @@
     <strong><%= GoodCategory.human_attribute_name(:good_sub_kind_id) %>:</strong>
     <%= @good_category.good_sub_kind.description %>
   </p>
-  <%= link_to t('actions.back'), good_categories_path, class: 'btn btn-primary' %>
-  <%= link_to t('actions.edit'), edit_good_category_path(@good_category), class: 'btn btn-primary' %>
-  <%= link_to t('actions.destroy'), @good_category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <%= link_to t('views.actions.back'), good_categories_path, class: 'btn btn-primary' %>
+  <%= link_to t('views.actions.edit'), edit_good_category_path(@good_category), class: 'btn btn-primary' %>
+  <%= link_to t('views.actions.destroy'), @good_category, method: :delete, data: { confirm: t('views.confirm') }, class: 'btn btn-danger' %>
 </div>

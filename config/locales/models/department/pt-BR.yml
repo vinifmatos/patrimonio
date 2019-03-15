@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      department:
+        one: Departamento
+        other: Departamentos
+    attributes:
+      department:
+        description: Descrição
+        active: Ativo
+        property_id: Propriedade

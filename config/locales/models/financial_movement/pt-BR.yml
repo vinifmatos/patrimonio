@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      financial_movement:
+        one: Movimento Financeiro
+        other: Movimentos Financeiros
+    attributes:
+      financial_movement/kinds:
+        initial: Inicial
+        depreciation: Depreciação
+        revaluation: Reavalição
+      financial_movement:
+        date: Data
+        financial_movement_kind_id: Tipo
+        amount: Valor
+        code: Código

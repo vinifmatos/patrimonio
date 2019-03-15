@@ -1,0 +1,25 @@
+pt-BR:
+  activerecord:
+    models:
+      good_kind:
+        one: Tipo
+        other: Tipos
+      good_sub_kind:
+        one: Sub Tipo
+        other: Sub Tipos
+      department:
+        one: Departamento
+        other: Departamentos
+      property:
+        one: Propriedade
+        other: Propriedades
+      movement:
+        one: Movimento
+        other: Movimentos
+      financial_movement:
+        one: Movimento Financeiro
+        other: Movimentos Financeiros
+    attributes:
+      good_kind:
+        description: Descrição
+        active: Ativo

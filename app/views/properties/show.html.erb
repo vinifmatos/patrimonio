@@ -8,7 +8,7 @@
     <strong><%= Property.human_attribute_name(:active) %>:</strong>
     <%= t_active @property.active %>
   </p>
-  <%= link_to t('actions.back'), properties_path, class: 'btn btn-primary' %>
-  <%= link_to t('actions.edit'), edit_property_path(@property), class: 'btn btn-primary' %>
-  <%= link_to t('actions.destroy'), @property, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
+  <%= link_to t('views.actions.back'), properties_path, class: 'btn btn-primary' %>
+  <%= link_to t('views.actions.edit'), edit_property_path(@property), class: 'btn btn-primary' %>
+  <%= link_to t('views.actions.destroy'), @property, method: :delete, data: { confirm: t('views.confirm') }, class: 'btn btn-danger' %>
 </div>

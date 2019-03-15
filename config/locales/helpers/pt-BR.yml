@@ -1,0 +1,6 @@
+pt-BR:
+  helpers:
+    submit:
+      movement:
+        create: Salvar Movimentação
+        update: Salvar Movimentação

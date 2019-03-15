@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      property:
+        one: Propriedade
+        other: Propriedades
+    attributes:
+      property:
+        description: Descrição
+        active: Ativo

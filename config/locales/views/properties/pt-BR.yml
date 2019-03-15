@@ -1,0 +1,7 @@
+pt-BR:
+  views:
+    properties:
+      new:
+        title: Nova Propriedade
+      edit:
+        title: Editar Propriedade

@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      movement:
+        one: Movimento
+        other: Movimentos
+    attributes:
+      movement/kinds:
+        incorporation: Incorporação
+        borrowing: Empréstimo
+        inactivation: Desativação
+        transference: Transferência
+        maintence: Manutenção
+      movement:
+        date: Data
+        movement_kind_id: Tipo
+        department_id: Departamento
+        code: Código

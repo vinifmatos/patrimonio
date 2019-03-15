@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      good_category:
+        one: Categoria
+        other: Categorias
+    attributes:
+      good_category:
+        description: Descrição
+        active: Ativo
+        good_sub_kind_id: Sub Tipo

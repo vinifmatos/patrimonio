@@ -1,0 +1,7 @@
+pt-BR:
+  views:
+    good_kinds:
+      new:
+        title: Novo Tipo
+      edit:
+        title: Editar Tipo

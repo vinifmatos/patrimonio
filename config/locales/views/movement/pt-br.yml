@@ -1,0 +1,11 @@
+pt-BR:
+  views:
+    movements:
+      index:
+        title:
+          movement: Movimentação
+          movements: Movimentações
+      new:
+        title: Nova Movimentação
+      actions:
+        move: Movimentar

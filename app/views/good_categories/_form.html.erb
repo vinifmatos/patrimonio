@@ -24,9 +24,9 @@
   <div class="form-actions">
     <%= form.submit class: 'btn btn-success'  %>
     <% if action_name == 'edit' %>
-      <%= link_to t('actions.back'), good_category_path(good_category), class: 'btn btn-primary' %>
+      <%= link_to t('views.actions.back'), good_category_path(good_category), class: 'btn btn-primary' %>
     <% else %>
-      <%= link_to t('actions.back'), good_categories_path, class: 'btn btn-primary' %>
+      <%= link_to t('views.actions.back'), good_categories_path, class: 'btn btn-primary' %>
     <% end %>
   </div>
 <% end %>

@@ -35,7 +35,7 @@
     <strong><%= Good.human_attribute_name(:department_id) %>:</strong>
     <%= @good.department.description %>
   </p>
-  <%= link_to t('actions.back'), goods_path, class: 'btn btn-primary' %>
-  <%= link_to t('actions.edit'), edit_good_path(@good), class: 'btn btn-primary' %>
-  <%= link_to t('actions.destroy'), @good, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
+  <%= link_to t('views.actions.back'), goods_path, class: 'btn btn-primary' %>
+  <%= link_to t('views.actions.edit'), edit_good_path(@good), class: 'btn btn-primary' %>
+  <%= link_to t('views.actions.destroy'), @good, method: :delete, data: { confirm: t('views.confirm') }, class: 'btn btn-danger' %>
 </div>

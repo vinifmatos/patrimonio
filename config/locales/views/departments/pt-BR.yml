@@ -1,0 +1,7 @@
+pt-BR:
+  views:
+    departments:
+      new:
+        title: Novo Departamento
+      edit:
+        title: Editar Departamento

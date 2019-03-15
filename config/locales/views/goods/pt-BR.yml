@@ -1,0 +1,13 @@
+pt-BR:
+  views:
+    goods:
+      register:
+        title: Cadastro
+      financial_movements:
+        title: Movimentação Financeira
+      movements:
+        title: Movimentação
+      new:
+        title: Novo Bem
+      edit:
+        title: Editar Bem

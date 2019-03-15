@@ -1,0 +1,7 @@
+pt-BR:
+  views:
+    good_sub_kinds:
+      new:
+        title: Novo Sub Tipo
+      edit:
+        title: Editar Sub Tipo

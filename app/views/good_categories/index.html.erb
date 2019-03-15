@@ -1,18 +1,18 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
   <div class="row">
-    <h1>Good Categories</h1>
+    <h1><%= GoodCategory.model_name.human(count: 2) %></h1>
     <div class="ml-auto mt-2">
-      <%= link_to t('actions.new'), new_good_category_path, class: 'btn btn-success' %>
+      <%= link_to t('views.good_categories.new.title'), new_good_category_path, class: 'btn btn-success' %>
     </div>
   </div>
   <div class="row">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Description</th>
-          <th>Active</th>
-          <th>Sub kind</th>
+          <th><%= GoodCategory.human_attribute_name(:description) %></th>
+          <th><%= GoodCategory.human_attribute_name(:active) %></th>
+          <th><%= GoodCategory.human_attribute_name(:good_sub_kind_id) %></th>
         </tr>
       </thead>
       <tbody>

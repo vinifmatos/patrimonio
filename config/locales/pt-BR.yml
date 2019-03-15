@@ -1,17 +1,12 @@
 pt-BR:
-  goods: Bens
-  kinds: Tipos
-  sub_kinds: Sub Tipos
-  categories: Categorias
-  properties: Propriedades
-  departments: Departamentos
-  actions:
-    show: Exibir
-    edit: Editar
-    new: Novo
-    back: Voltar
-    destroy: Excluir
-  confirm: Você tem certeza?
-  active:
-    true: Sim
-    false: Não
+  views:
+    actions:
+      show: Exibir
+      edit: Editar
+      new: Novo
+      back: Voltar
+      destroy: Excluir
+    confirm: Você tem certeza?
+    active:
+      true: Sim
+      false: Não

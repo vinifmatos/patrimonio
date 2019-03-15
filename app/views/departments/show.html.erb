@@ -11,7 +11,7 @@
     <strong><%= Department.human_attribute_name(:active) %>:</strong>
     <%= t_active @department.active %>
   </p>
-  <%= link_to t('actions.back'), departments_path, class: 'btn btn-primary' %>
-  <%= link_to t('actions.edit'), edit_department_path(@department), class: 'btn btn-primary' %>
-  <%= link_to t('actions.destroy'), @department, method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
+  <%= link_to t('views.actions.back'), departments_path, class: 'btn btn-primary' %>
+  <%= link_to t('views.actions.edit'), edit_department_path(@department), class: 'btn btn-primary' %>
+  <%= link_to t('views.actions.destroy'), @department, method: :delete, data: { confirm: t('views.confirm') }, class: 'btn btn-danger' %>
 </div>
