@@ -92,6 +92,22 @@ RSpec.describe Movement, type: :model do
 
         expect(movement).to_not be_valid
       end
+
+      it 'if good situation is borrowed' do
+        good = create(:good)
+        good.update(good_situation_id: GoodSituation::SITUATIONS[:borrowed])
+        movement = build(:movement, good: good, movement_kind: movement_kind)
+
+        expect(movement).to_not be_valid
+      end
+
+      it 'if good situation is maintenance' do
+        good = create(:good)
+        good.update(good_situation_id: GoodSituation::SITUATIONS[:maintenance])
+        movement = build(:movement, good: good, movement_kind: movement_kind)
+
+        expect(movement).to_not be_valid
+      end
     end
   end
 end
