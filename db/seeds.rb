@@ -15,7 +15,7 @@
   )
 end
 
-{ incorporation: 0, borrowing: 1, transference: 2, inactivation: 3, maintence: 4 }.each do |k, v|
+{ incorporation: 0, borrowing: 1, transference: 2, maintence: 3 }.each do |k, v|
   MovementKind.create(
     id: v,
     description: k
