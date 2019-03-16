@@ -16,3 +16,6 @@ pt-BR:
         movement_kind_id: Tipo
         department_id: Departamento
         code: Código
+    errors:
+      messages:
+        date_less_then: Não pode ser menor que %{date}

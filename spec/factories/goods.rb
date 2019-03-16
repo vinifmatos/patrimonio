@@ -9,18 +9,7 @@ FactoryBot.define do
     purchase_date { Faker::Date.between(60.days.ago, Date.today) }
     base_date { Faker::Date.between(purchase_date, purchase_date.next_day(15)) }
     good_situation { GoodSituation.all.sample }
-
-    factory :good_with_department do
-      department
-    end
-
-    factory :good_with_category do
-      good_category
-    end
-
-    factory :good_full do
-      department
-      good_category
-    end
+    department
+    good_category
   end
 end
