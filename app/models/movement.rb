@@ -10,12 +10,11 @@ class Movement < ApplicationRecord
   validate :validate_date
   validate :validate_department
   validate :validate_good_active
+  validate :validate_transference_borrowed
 
   before_validation :set_code
 
-  def set_code
-    self.code ||= 1 + (Movement.where(good_id: good_id).maximum(:code) || 0)
-  end
+  private
 
   def validate_date
     last_date = Movement.where(good_id: good_id).maximum(:date)
@@ -31,9 +30,24 @@ class Movement < ApplicationRecord
   def validate_department
     last_movement = Movement.where(good_id: good_id).order(:date, :created_at).last
     if department.present?
-      if movement_kind_id == MovementKind::KINDS[:transference] && last_movement.department_id == department_id
+      if movement_kind_id == MovementKind::KINDS[:transference] &&
+         last_movement.department_id == department_id
         errors.add(:department_id, :move_to_same_department, department: department.description)
       end
+    end
+  end
+
+  def set_code
+    self.code ||= 1 + (Movement.where(good_id: good_id).maximum(:code) || 0)
+  end
+
+  def validate_transference_borrowed
+    if good.borrowed? && movement_kind_id != MovementKind::KINDS[:regress]
+      errors.add(
+        :movement_kind_id,
+        :move_borrowed_good,
+        good: good.description
+      )
     end
   end
 end

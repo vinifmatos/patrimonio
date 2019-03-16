@@ -17,6 +17,18 @@ class Good < ApplicationRecord
     good_situation_id == GoodSituation::SITUATIONS[:inactive]
   end
 
+  def active?
+    good_situation_id == GoodSituation::SITUATIONS[:active]
+  end
+
+  def borrowed?
+    good_situation_id == GoodSituation::SITUATIONS[:borrowed]
+  end
+
+  def maintenance?
+    good_situation_id == GoodSituation::SITUATIONS[:maintenance]
+  end
+
   private
 
   def create_initial_movement
