@@ -60,6 +60,7 @@ $(document).on("turbolinks:load", function () {
     [data, status, xhr] = event.detail
     $('#movements-table > tbody').append(xhr.responseText)
     $('#new-movement-modal').modal('hide')
+    updateDepartmentsOptions()
   });
 
   $("#movement-form").on("ajax:error", function (event) {
@@ -87,3 +88,11 @@ $(document).on("turbolinks:load", function () {
     })
   });
 });
+
+function updateDepartmentsOptions() {
+  var str = window.location.pathname;
+  $.get("/goods/" + str.substr(str.length - 1) + "/departments/", function (data) {
+    $("#movement_department_id").children("optgroup").remove()
+    $("#movement_department_id").append(data)
+  });
+};

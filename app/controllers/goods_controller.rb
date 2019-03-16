@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GoodsController < ApplicationController
-  before_action :set_good, only: %i[edit update destroy]
+  before_action :set_good, only: %i[edit update destroy departments]
   before_action :set_good_categories, only: %i[new edit]
   before_action :set_departments, only: %i[new edit]
   before_action :set_situations, only: %i[new edit]
@@ -22,11 +22,9 @@ class GoodsController < ApplicationController
       financial_movements: :financial_movement_kind
     ).find(params[:id])
 
-    @departments = Property.all.includes(:departments).map do |p|
-      [p.description, p.departments.map { |d| [d.description, d.id] }]
-    end
+    set_avaliable_departments
 
-    @movement_kids = MovementKind.all.select(:id, :description).map { |k| [MovementKind.t(k.description), k.id] }
+    @movement_kids = MovementKind.select(:id, :description).find(1, 2).map { |k| [MovementKind.t(k.description), k.id] }
   end
 
   # GET /goods/new
@@ -77,6 +75,10 @@ class GoodsController < ApplicationController
     end
   end
 
+  def departments
+    set_avaliable_departments
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -109,5 +111,11 @@ class GoodsController < ApplicationController
 
   def set_situations
     @situations = GoodSituation.all.map { |s| [GoodSituation.t(s.description), s.id] }
+  end
+
+  def set_avaliable_departments
+    @departments = (Property.includes(:departments).where.not(departments: { id: @good.movements.last.department_id }).map do |p|
+      [p.description, p.departments.map { |d| [d.description, d.id] }.sort]
+    end).sort
   end
 end

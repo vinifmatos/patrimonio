@@ -4,7 +4,7 @@ class Good < ApplicationRecord
   belongs_to :good_category
   belongs_to :department
   belongs_to :good_situation
-  has_many :movements
+  has_many :movements, -> { order(:date, :created_at) }
   has_many :financial_movements
   after_create :create_initial_movement
   after_create :create_initial_financial_movement
@@ -18,7 +18,7 @@ class Good < ApplicationRecord
       good_id: id,
       department_id: department_id,
       date: Time.now,
-      movement_kind_id: 1
+      movement_kind_id: 0
     )
   end
 
@@ -26,7 +26,7 @@ class Good < ApplicationRecord
     FinancialMovement.create(
       good_id: id,
       date: Time.now,
-      financial_movement_kind_id: 1,
+      financial_movement_kind_id: 0,
       amount: purchase_price
     )
   end
