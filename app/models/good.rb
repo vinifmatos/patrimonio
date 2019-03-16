@@ -17,16 +17,16 @@ class Good < ApplicationRecord
     Movement.create(
       good_id: id,
       department_id: department_id,
-      date: Time.now,
-      movement_kind_id: 0
+      date: Time.now.localtime,
+      movement_kind_id: MovementKind::KINDS[:incorporation]
     )
   end
 
   def create_initial_financial_movement
     FinancialMovement.create(
       good_id: id,
-      date: Time.now,
-      financial_movement_kind_id: 0,
+      date: Time.now.localtime,
+      financial_movement_kind_id: FinancialMovementKind::KINDS[:initial],
       amount: purchase_price
     )
   end

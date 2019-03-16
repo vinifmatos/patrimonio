@@ -8,7 +8,7 @@ FactoryBot.define do
     purchase_price { Faker::Commerce.price }
     purchase_date { Faker::Date.between(60.days.ago, Date.today) }
     base_date { Faker::Date.between(purchase_date, purchase_date.next_day(15)) }
-    good_situation { GoodSituation.all.sample }
+    good_situation { GoodSituation.take }
     department
     good_category
   end

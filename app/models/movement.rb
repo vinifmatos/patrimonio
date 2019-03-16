@@ -24,7 +24,7 @@ class Movement < ApplicationRecord
   def validate_department
     last_movement = Movement.where(good_id: good_id).order(:date, :created_at).last
     if department.present?
-      if movement_kind_id == 2 && last_movement.department_id == department_id
+      if movement_kind_id == MovementKind::KINDS[:transference] && last_movement.department_id == department_id
         errors.add(:department_id, :move_to_same_department, department: department.description)
       end
     end

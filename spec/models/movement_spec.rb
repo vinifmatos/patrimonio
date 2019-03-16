@@ -45,14 +45,21 @@ RSpec.describe Movement, type: :model do
   end
 
   context 'kind is tranference' do
+    let(:movement_kind) { MovementKind.find(MovementKind::KINDS[:transference]) }
+
     context 'is invalid' do
       it 'with department equals to last movement department' do
         good = create(:good)
-        movement = build(:movement, good: good, department: good.movements.last.department, movement_kind: MovementKind.find(2))
+        movement = build(:movement, good: good, department: good.movements.last.department, movement_kind: movement_kind)
         expect(movement).to_not be_valid
       end
 
-      it 'if good situation is inative'
+      it 'if good situation is inative' do
+        good = create(:good, good_situation_id: 1)
+        movement = build(:movement, good: good, movement_kind: movement_kind)
+
+        expect(movement).to_not be_valid
+      end
 
       it 'if good is situation is borrowed'
     end
