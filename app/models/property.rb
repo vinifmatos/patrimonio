@@ -11,6 +11,6 @@ class Property < ApplicationRecord
   private
 
   def set_active
-    self.active = true
+    self.active ||= true
   end
 end
