@@ -9,8 +9,9 @@ class Movement < ApplicationRecord
   validates :code, uniqueness: { scope: :good_id }
   validate :validate_date
   validate :validate_department
-  validate :validate_good_active
-  validate :validate_transference_borrowed
+  validate :good_is_active
+  validate :good_is_borrowed
+  validate :good_in_maintenance
 
   before_validation :set_code
 
@@ -21,7 +22,7 @@ class Movement < ApplicationRecord
     (errors.add(:date, :date_less_then, date: I18n.l(last_date)) if date < last_date) unless date.nil? || last_date.nil?
   end
 
-  def validate_good_active
+  def good_is_active
     if good.present?
       errors.add(:base, :good_inative, good: good.description) if good.inactive?
     end
@@ -41,8 +42,18 @@ class Movement < ApplicationRecord
     self.code ||= 1 + (Movement.where(good_id: good_id).maximum(:code) || 0)
   end
 
-  def validate_transference_borrowed
+  def good_is_borrowed
     if good.borrowed? && movement_kind_id != MovementKind::KINDS[:regress]
+      errors.add(
+        :movement_kind_id,
+        :move_borrowed_good,
+        good: good.description
+      )
+    end
+  end
+
+  def good_in_maintenance
+    if good.maintenance? && movement_kind_id != MovementKind::KINDS[:regress]
       errors.add(
         :movement_kind_id,
         :move_borrowed_good,
