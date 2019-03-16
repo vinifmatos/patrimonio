@@ -55,7 +55,8 @@ RSpec.describe Movement, type: :model do
       end
 
       it 'if good situation is inative' do
-        good = create(:good, good_situation_id: 1)
+        good = create(:good)
+        good.update(good_situation_id: GoodSituation::SITUATIONS[:inactive])
         movement = build(:movement, good: good, movement_kind: movement_kind)
 
         expect(movement).to_not be_valid

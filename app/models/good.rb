@@ -13,6 +13,10 @@ class Good < ApplicationRecord
     I18n.t "activerecord.attributes.good/situations.#{situation}"
   end
 
+  def inactive?
+    good_situation_id == GoodSituation::SITUATIONS[:inactive]
+  end
+
   private
 
   def create_initial_movement

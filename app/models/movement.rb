@@ -9,6 +9,7 @@ class Movement < ApplicationRecord
   validates :code, uniqueness: { scope: :good_id }
   validate :validate_date
   validate :validate_department
+  validate :validate_good_active
 
   before_validation :set_code
 
@@ -19,6 +20,12 @@ class Movement < ApplicationRecord
   def validate_date
     last_date = Movement.where(good_id: good_id).maximum(:date)
     (errors.add(:date, :date_less_then, date: I18n.l(last_date)) if date < last_date) unless date.nil? || last_date.nil?
+  end
+
+  def validate_good_active
+    if good.present?
+      errors.add(:base, :good_inative, good: good.description) if good.inactive?
+    end
   end
 
   def validate_department
