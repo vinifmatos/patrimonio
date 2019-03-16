@@ -73,8 +73,16 @@ RSpec.describe Movement, type: :model do
   end
 
   context 'kind is borrowing' do
+    let(:movement_kind) { MovementKind.find(MovementKind::KINDS[:borrowing]) }
+
     context 'is not valid' do
-      it 'if good situation is inative'
+      it 'if good situation is inative' do
+        good = create(:good)
+        good.update(good_situation_id: GoodSituation::SITUATIONS[:inactive])
+        movement = build(:movement, good: good, movement_kind: movement_kind)
+
+        expect(movement).to_not be_valid
+      end
     end
   end
 end
