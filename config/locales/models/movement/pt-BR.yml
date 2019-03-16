@@ -19,3 +19,4 @@ pt-BR:
     errors:
       messages:
         date_less_then: Não pode ser menor que %{date}
+        move_to_same_department: O bem já está no Departamento %{department}

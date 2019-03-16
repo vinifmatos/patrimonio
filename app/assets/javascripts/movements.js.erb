@@ -1,0 +1,89 @@
+$(document).on("turbolinks:load", function () {
+
+  $("#movement_date").change(() => validate())
+  $("#movement_department_id").change(() => validate())
+  $("#movement_movement_kind_id").change(() => validate())
+
+  $("#movement-form").submit(function (e) {
+    validate()
+    if ($("#movement_date").hasClass("is-invalid")) {
+      e.preventDefault();
+      return false
+    }
+  })
+})
+
+function validate() {
+  if ($("#movement_date").val() == "") {
+    $("#date_validation_msg").html("<%= I18n.t('views.validations.empyt') %>")
+    $("#movement_date").addClass("is-invalid")
+  } else {
+    if ($("#movement_date").hasClass("is-invalid")) {
+      $("#movement_date").removeClass("is-invalid")
+    }
+    $("#movement_date").addClass("is-valid")
+  }
+
+  if ($("#movement_date").val().match(/\d{2}\/\d{2}\/\d{4}/g) == null) {
+    $("#date_validation_msg").html("<%= I18n.t('views.validations.invalid_date') %>")
+    $("#movement_date").addClass("is-invalid")
+  } else {
+    if ($("#movement_date").hasClass("is-invalid")) {
+      $("#movement_date").removeClass("is-invalid")
+    }
+    $("#movement_date").addClass("is-valid")
+  }
+
+  if ($("#movement_department_id").val() == "") {
+    $("#movement_department_id_validation_msg").html("<%= I18n.t('views.validations.select') %>")
+    $("#movement_department_id").addClass("is-invalid")
+  } else {
+    if ($("#movement_department_id").hasClass("is-invalid")) {
+      $("#movement_department_id").removeClass("is-invalid")
+    }
+    $("#movement_department_id").addClass("is-valid")
+  }
+
+  if ($("#movement_movement_kind_id").val() == "") {
+    $("#movement_movement_kind_id_validation_msg").html("<%= I18n.t('views.validations.select') %>")
+    $("#movement_movement_kind_id").addClass("is-invalid")
+  } else {
+    if ($("#movement_movement_kind_id").hasClass("is-invalid")) {
+      $("#movement_movement_kind_id").removeClass("is-invalid")
+    }
+    $("#movement_movement_kind_id").addClass("is-valid")
+  }
+}
+
+$(document).on("turbolinks:load", function () {
+  $("#movement-form").on("ajax:success", function (event) {
+    [data, status, xhr] = event.detail
+    $('#movements-table > tbody').append(xhr.responseText)
+    $('#new-movement-modal').modal('hide')
+  });
+
+  $("#movement-form").on("ajax:error", function (event) {
+    [data, status, xhr] = event.detail
+    var json = JSON.parse(xhr.responseText)
+    for (var field in json["errors"]) {
+      el = "#movement_" + field
+      msg_el = "#" + field + "_validation_msg"
+      if (!$(el).hasClass("is-invalid")) {
+        $(el).addClass("is-invalid");
+      }
+      $(msg_el).html(json["errors"][field].join("<br>"))
+    }
+  });
+
+  $('#new-movement-modal').on("hidden.bs.modal", function () {
+    $('#new-movement-modal').find(".is-valid").each(function () {
+      $(this).removeClass("is-valid")
+      $(this).val("")
+    })
+
+    $('#new-movement-modal').find(".is-invalid").each(function () {
+      $(this).removeClass("is-invalid")
+      $(this).val("")
+    })
+  });
+});

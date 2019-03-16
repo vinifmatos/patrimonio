@@ -6,12 +6,9 @@ class MovementsController < ApplicationController
     @movement.good = Good.find(params[:good_id])
     respond_to do |format|
       if @movement.save
-        # redirect_to good_path(@good), notice: 'Movement created'
-        # format.json { render json: @movement, only: %i[code date], include: { department: { only: :description }, movement_kind: { only: :description } }, status: :created, location: @movement.good }
-        format.json { render :create, status: :created, location: @movement.good }
+        format.js { render :create, status: :created, location: @movement.good }
       else
-        # redirect_to good_path(@good)
-        format.json { render json: @movement.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @movement.errors }, status: :unprocessable_entity }
       end
     end
   end

@@ -11,4 +11,6 @@ pt-BR:
       true: Sim
       false: Não
     validations:
-      required: O preenchimento deste campo é obrigatório
+      empyt: não pode ficar em branco
+      select: uma opção deve ser selecionada
+      invalid_date: "o formato da data deve ser: dd/mm/aaaa"

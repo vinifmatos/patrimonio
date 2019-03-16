@@ -7,7 +7,7 @@ namespace :dev do
     `rails db:create db:migrate db:seed`
 
     puts 'Criando goods...'
-    FactoryBot.create_list(:good_full, 30)
+    FactoryBot.create_list(:good, 30)
   end
 
   task resetup: :environment do
@@ -15,6 +15,6 @@ namespace :dev do
     `rails db:drop db:create db:migrate db:seed`
 
     puts 'Criando goods...'
-    FactoryBot.create_list(:good_full, 30)
+    FactoryBot.create_list(:good, 30)
   end
 end

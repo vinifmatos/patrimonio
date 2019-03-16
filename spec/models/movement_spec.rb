@@ -36,11 +36,23 @@ RSpec.describe Movement, type: :model do
       expect(movement).to_not be_valid
     end
 
-    it 'with date less then last move date' do
+    it 'with date less then last movement date' do
       good = create(:good)
       movement = build(:movement, good: good, date: good.movements.last.date.days_ago(10))
 
       expect(movement).to_not be_valid
+    end
+  end
+
+  context 'tranference kind' do
+    context 'is invalid' do
+      it 'with department equals to last movement department' do
+        good = create(:good)
+        movement = build(:movement, good: good, department: good.movements.last.department, movement_kind: MovementKind.find(2))
+        puts good.movements.last.department
+        puts movement.department
+        expect(movement).to_not be_valid
+      end
     end
   end
 end
