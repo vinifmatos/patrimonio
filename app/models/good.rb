@@ -13,6 +13,8 @@ class Good < ApplicationRecord
     I18n.t "activerecord.attributes.good/situations.#{situation}"
   end
 
+  private
+
   def create_initial_movement
     Movement.create(
       good_id: id,
