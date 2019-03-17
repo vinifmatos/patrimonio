@@ -29,5 +29,23 @@ RSpec.describe GoodSubKind, type: :model do
 
       expect(good_sub_kind).to_not be_valid
     end
+
+    it 'without depreciation lifespan' do
+      good_sub_kind = build(:good_sub_kind, lifespan: nil)
+
+      expect(good_sub_kind).to_not be_valid
+    end
+
+    it 'without depreciation residual_amount_rate' do
+      good_sub_kind = build(:good_sub_kind, residual_amount_rate: nil)
+
+      expect(good_sub_kind).to_not be_valid
+    end
+
+    it 'without depreciation yearly_depreciation_rate' do
+      good_sub_kind = build(:good_sub_kind, yearly_depreciation_rate: nil)
+
+      expect(good_sub_kind).to_not be_valid
+    end
   end
 end
