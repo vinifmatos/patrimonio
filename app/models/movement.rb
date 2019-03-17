@@ -43,22 +43,26 @@ class Movement < ApplicationRecord
   end
 
   def good_is_borrowed
-    if good.borrowed? && movement_kind_id != MovementKind::KINDS[:regress]
-      errors.add(
-        :movement_kind_id,
-        :move_borrowed_good,
-        good: good.description
-      )
+    if good.present?
+      if good.borrowed? && movement_kind_id != MovementKind::KINDS[:regress]
+        errors.add(
+          :movement_kind_id,
+          :move_borrowed_good,
+          good: good.description
+        )
+      end
     end
   end
 
   def good_in_maintenance
-    if good.maintenance? && movement_kind_id != MovementKind::KINDS[:regress]
-      errors.add(
-        :movement_kind_id,
-        :move_borrowed_good,
-        good: good.description
-      )
+    if good.present?
+      if good.maintenance? && movement_kind_id != MovementKind::KINDS[:regress]
+        errors.add(
+          :movement_kind_id,
+          :move_borrowed_good,
+          good: good.description
+        )
+      end
     end
   end
 end
