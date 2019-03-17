@@ -23,5 +23,11 @@ RSpec.describe GoodSubKind, type: :model do
 
       expect(good_sub_kind).to_not be_valid
     end
+
+    it 'without depreciation method' do
+      good_sub_kind = build(:good_sub_kind, depreciation_method: nil)
+
+      expect(good_sub_kind).to_not be_valid
+    end
   end
 end

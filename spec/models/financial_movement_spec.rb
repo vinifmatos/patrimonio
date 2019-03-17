@@ -85,6 +85,16 @@ RSpec.describe FinancialMovement, type: :model do
       expect(financial_movement).to_not be_valid
     end
 
-    it 'if amount of depreciation is greater than the depreciable amount'
+    it 'if amount of depreciation is greater than the depreciable amount' do
+      good = create(:good)
+      financial_movement = build(:financial_movement,
+                                 good: good,
+                                 amount: good.depreciable_amount + 1,
+                                 financial_movement_kind: FinancialMovementKind.find(
+                                   FinancialMovementKind::KINDS[:depreciation]
+                                 ))
+
+      expect(financial_movement).to_not be_valid
+    end
   end
 end

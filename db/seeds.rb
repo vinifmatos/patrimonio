@@ -28,3 +28,10 @@ FinancialMovementKind::KINDS.each do |k, v|
     description: k
   )
 end
+
+DepreciationMethod::METHODS.each do |k, v|
+  DepreciationMethod.create(
+    id: v,
+    description: k
+  )
+end

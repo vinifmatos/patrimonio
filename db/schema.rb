@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_030707) do
+ActiveRecord::Schema.define(version: 2019_03_17_162919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 2019_03_14_030707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["property_id"], name: "index_departments_on_property_id"
+  end
+
+  create_table "depreciation_methods", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "financial_movement_kinds", force: :cascade do |t|
@@ -38,6 +44,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_030707) do
     t.datetime "updated_at", null: false
     t.bigint "financial_movement_kind_id"
     t.integer "code"
+    t.decimal "depreciated_amount", precision: 15, scale: 2, default: "0.0"
+    t.decimal "net_amount", precision: 15, scale: 2
     t.index ["financial_movement_kind_id"], name: "index_financial_movements_on_financial_movement_kind_id"
     t.index ["good_id"], name: "index_financial_movements_on_good_id"
   end
@@ -70,6 +78,11 @@ ActiveRecord::Schema.define(version: 2019_03_14_030707) do
     t.bigint "good_kind_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "lifespan"
+    t.float "residual_amount_rate"
+    t.float "yearly_depreciation_rate"
+    t.bigint "depreciation_method_id"
+    t.index ["depreciation_method_id"], name: "index_good_sub_kinds_on_depreciation_method_id"
     t.index ["good_kind_id"], name: "index_good_sub_kinds_on_good_kind_id"
   end
 
@@ -85,6 +98,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_030707) do
     t.bigint "good_category_id"
     t.bigint "department_id"
     t.bigint "good_situation_id"
+    t.decimal "residual_amount", precision: 15, scale: 2
+    t.decimal "depreciable_amount", precision: 15, scale: 2
     t.index ["department_id"], name: "index_goods_on_department_id"
     t.index ["good_category_id"], name: "index_goods_on_good_category_id"
     t.index ["good_situation_id"], name: "index_goods_on_good_situation_id"
@@ -122,6 +137,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_030707) do
   add_foreign_key "financial_movements", "financial_movement_kinds"
   add_foreign_key "financial_movements", "goods"
   add_foreign_key "good_categories", "good_sub_kinds"
+  add_foreign_key "good_sub_kinds", "depreciation_methods"
   add_foreign_key "good_sub_kinds", "good_kinds"
   add_foreign_key "goods", "departments"
   add_foreign_key "goods", "good_categories"

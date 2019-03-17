@@ -5,6 +5,8 @@ class FinancialMovement < ApplicationRecord
   belongs_to :financial_movement_kind
 
   before_validation :set_code
+  before_validation :set_net_amount
+  before_validation :set_depreciated_amount
 
   validates_presence_of :date, :amount
   validates_numericality_of :amount, greater_than: 0, unless: :depreciation?
@@ -12,6 +14,7 @@ class FinancialMovement < ApplicationRecord
   validate :date_validation
   validate :good_is_active_validation
   validates :code, uniqueness: { scope: :good_id }
+  validate :depreciable_amount_validation
 
   private
 
@@ -34,5 +37,49 @@ class FinancialMovement < ApplicationRecord
 
   def depreciation?
     financial_movement_kind_id == FinancialMovementKind::KINDS[:depreciation]
+  end
+
+  def revaluation?
+    financial_movement_kind_id == FinancialMovementKind::KINDS[:revaluation]
+  end
+
+  def initial?
+    financial_movement_kind_id == FinancialMovementKind::KINDS[:initial]
+  end
+
+  def set_depreciated_amount
+    if financial_movement_kind.present? && good.present? && amount.present?
+      self.depreciated_amount = if depreciation?
+                                  amount + good.financial_movements.last.depreciated_amount
+                                elsif initial?
+                                  amount
+                                else
+                                  good.financial_movements.last.depreciated_amount
+                                end
+    end
+  end
+
+  def set_net_amount
+    if good.present? && amount.present?
+      self.net_amount = if revaluation?
+                          amount + good.financial_movements.last.net_amount
+                        elsif initial?
+                          amount
+                        else
+                          good.financial_movements.last.net_amount
+                        end
+    end
+  end
+
+  def depreciable_amount_validation
+    if good.present? && amount.present? && depreciation?
+      depreciable_amount =
+        good.depreciable_amount - good.financial_movements.last.depreciated_amount
+      if amount > depreciable_amount
+        errors.add(:amount,
+                   :greater_than_depreciable_amount,
+                   depreciable_amount: depreciable_amount)
+      end
+    end
   end
 end

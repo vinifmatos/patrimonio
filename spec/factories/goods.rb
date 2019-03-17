@@ -10,6 +10,8 @@ FactoryBot.define do
     good_situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
     department
     good_category
+    # residual_amount { purchase_price * (good_category.good_sub_kind.residual_amount_rate / 100) }
+    # depreciable_amount { purchase_price - residual_amount }
   end
 
   factory :good_with_base_date_less_than_purchase_date, class: Good do
@@ -21,6 +23,8 @@ FactoryBot.define do
     good_situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
     department
     good_category
+    # residual_amount { purchase_price * (good_category.good_sub_kind.residual_amount_rate / 100) }
+    # depreciable_amount { purchase_price - residual_amount }
   end
 
   factory :good_without_purchase_date, class: Good do
@@ -31,5 +35,7 @@ FactoryBot.define do
     good_situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
     department
     good_category
+    # residual_amount { purchase_price * (good_category.good_sub_kind.residual_amount_rate / 100) }
+    # depreciable_amount { purchase_price - residual_amount }
   end
 end

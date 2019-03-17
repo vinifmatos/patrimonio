@@ -10,8 +10,16 @@ class Good < ApplicationRecord
   after_create :create_initial_financial_movement
 
   before_validation :set_code
+  before_validation :set_residual_amount
+  before_validation :set_depreciable_amount
 
-  validates_presence_of :description, :code, :base_date, :purchase_date, :purchase_price
+  validates_presence_of :description,
+                        :code,
+                        :base_date,
+                        :purchase_date,
+                        :purchase_price,
+                        :residual_amount,
+                        :depreciable_amount
   validates_uniqueness_of :code
   validates_numericality_of :purchase_price, greater_than: 0
 
@@ -64,11 +72,30 @@ class Good < ApplicationRecord
 
   def base_date_validation
     if base_date.present? && purchase_date.present?
-      errors.add(:base_date, :base_date_less_than_purchase_date, purchase_date: purchase_date) if base_date < purchase_date
+      if base_date < purchase_date
+        errors.add(:base_date,
+                   :base_date_less_than_purchase_date,
+                   purchase_date: purchase_date)
+      end
     end
   end
 
   def active_situation_on_create_validation
-    errors.add(:good_situation_id, :non_active_situation_on_create) if good_situation_id != GoodSituation::SITUATIONS[:active]
+    if good_situation_id != GoodSituation::SITUATIONS[:active]
+      errors.add(:good_situation_id, :non_active_situation_on_create)
+    end
+  end
+
+  def set_residual_amount
+    if purchase_price.present? && good_category.present?
+      self.residual_amount ||= purchase_price * (
+        good_category.good_sub_kind.residual_amount_rate / 100)
+    end
+  end
+
+  def set_depreciable_amount
+    if purchase_price.present? && residual_amount.present?
+      self.depreciable_amount ||= purchase_price - residual_amount
+    end
   end
 end
