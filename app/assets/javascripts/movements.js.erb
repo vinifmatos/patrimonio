@@ -1,11 +1,11 @@
 $(document).on("turbolinks:load", function () {
 
-  $("#movement_date").change(() => validate())
-  $("#movement_department_id").change(() => validate())
-  $("#movement_movement_kind_id").change(() => validate())
+  $("#movement_date").change(() => validateMovement())
+  $("#movement_department_id").change(() => validateMovement())
+  $("#movement_movement_kind_id").change(() => validateMovement())
 
   $("#movement-form").submit(function (e) {
-    validate()
+    validateMovement()
     if ($("#movement_date").hasClass("is-invalid")) {
       e.preventDefault();
       return false
@@ -13,7 +13,7 @@ $(document).on("turbolinks:load", function () {
   })
 })
 
-function validate() {
+function validateMovement() {
   if ($("#movement_date").val() == "") {
     $("#date_validation_msg").html("<%= I18n.t('views.validations.empyt') %>")
     $("#movement_date").addClass("is-invalid")

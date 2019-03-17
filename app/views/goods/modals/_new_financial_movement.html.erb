@@ -1,0 +1,36 @@
+<div class="modal fade" id="new-financial-movement-modal" tabindex="-1" role="dialog" aria-labelledby="new-financial-movement-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="new-financial-movement-modal-label"><%= t('views.financial_movements.new.revaluation.title') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with(model: [good, FinancialMovement.new], remote: true, id: 'financial-movement-form') do |form| %>
+        <%= form.hidden_field :financial_movement_kind_id, value: FinancialMovementKind::KINDS[:revaluation] %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= form.label :date %>
+            <%= datepicker_field(form, :date) do %>
+              <div id="financial_movement_date_validation_msg" class='invalid-feedback'>
+              </div>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <%= form.label :amount %>
+            <%= form.number_field :amount, min: 0.01, class: 'form-control'%>
+            <div id="financial_movement_amount_validation_msg" class='invalid-feedback'>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="actions">
+            <%= button_tag t('views.actions.back'), class: 'btn btn-primary', data: { dismiss: 'modal' } %>
+            <%= form.submit class: 'btn btn-success' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

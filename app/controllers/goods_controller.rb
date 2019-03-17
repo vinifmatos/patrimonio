@@ -24,7 +24,7 @@ class GoodsController < ApplicationController
 
     set_avaliable_departments
 
-    @movement_kids = MovementKind.select(:id, :description).find(1, 2).map { |k| [MovementKind.t(k.description), k.id] }
+    @movement_kinds = MovementKind.select(:id, :description).find(1, 2).map { |k| [MovementKind.t(k.description), k.id] }
   end
 
   # GET /goods/new

@@ -27,7 +27,7 @@
   </div>
   <div class="form-group">
     <%= form.label :purchase_price %>
-    <%= form.text_field :purchase_price, value: (number_with_precision(form.object.purchase_price, precision: 2) if form.object.purchase_price), class: 'form-control' %>
+    <%= form.number_field :purchase_price, min: 0.01, value: (number_with_precision(form.object.purchase_price, precision: 2) if form.object.purchase_price), class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= form.label :purchase_date %>

@@ -14,3 +14,4 @@ pt-BR:
       empyt: não pode ficar em branco
       select: uma opção deve ser selecionada
       invalid_date: "o formato da data deve ser: dd/mm/aaaa"
+      amount_min_value: o valor deve ser maior que 0,01

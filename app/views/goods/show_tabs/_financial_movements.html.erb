@@ -1,5 +1,6 @@
 <div class="tab-pane fade" id="financial-movements" role="tabpanel" aria-labelledby="financial-movements-tab">
-  <table class="table table-bordered table-hover">
+  <%= button_tag t('views.financial_movements.new.revaluation.title'), id: 'new-movement-btn', class: 'btn btn-success mb-3', data: { toggle: 'modal', backdrop: 'static', target: '#new-financial-movement-modal' } %>
+  <table id="financial-movements-table" class="table table-bordered table-hover">
     <thead>
       <tr>
         <th><%= financial_movements.human_attribute_name(:code) %></th>
@@ -19,4 +20,5 @@
       <% end %>
     </tbody>
   </table>
+  <%= render 'goods/modals/new_financial_movement', good: good %>
 </div>

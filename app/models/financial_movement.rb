@@ -4,13 +4,14 @@ class FinancialMovement < ApplicationRecord
   belongs_to :good
   belongs_to :financial_movement_kind
 
-  before_create :set_code
+  before_validation :set_code
 
   validates_presence_of :date, :amount
   validates_numericality_of :amount, greater_than: 0, unless: :depreciation?
   validates_numericality_of :amount, less_than: 0, if: :depreciation?
   validate :date_validation
   validate :good_is_active_validation
+  validates :code, uniqueness: { scope: :good_id }
 
   private
 

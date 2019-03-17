@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   resources :good_kinds
   resources :goods do
     resources :movements, only: :create
+    resources :financial_movements, only: :create
   end
 end

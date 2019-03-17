@@ -1,0 +1,10 @@
+pt-BR:
+  views:
+    financial_movements:
+      title:
+        one: Movimentação Financeira
+        others: Movimentações Financeiras
+      new:
+        title: Nova Movimentação Financeira
+        revaluation:
+          title: Nova Reavaliação

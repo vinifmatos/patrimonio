@@ -12,8 +12,7 @@ module ApplicationHelper
                                 class: "form-control datepicker-input #{options[:class]}", required: (options[:required] || false)) +
                 content_tag(:div, class: 'input-group-append') do
                   button_tag(fa_icon('calendar'),
-                             id: 'btn-datepicker',
-                             class: 'btn btn-outline-secondary', type: 'button')
+                             class: 'btn btn-outline-secondary btn-datepicker', type: 'button')
                 end
       content + capture(&block) if block_given?
     end

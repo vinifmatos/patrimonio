@@ -1,0 +1,98 @@
+$(document).on("turbolinks:load", function () {
+
+  $("#financial_movement_date").change(() => validateFinancialMovement())
+  $("#financial_movement_amount").change(() => validateFinancialMovement())
+  $("#financial_movement_financial_movement_kind_id").change(() => validateFinancialMovement())
+
+  $("#financial-movement-form").submit(function (e) {
+    validateFinancialMovement()
+    if ($("#financial_movement_date").hasClass("is-invalid")) {
+      e.preventDefault();
+      return false
+    }
+  })
+})
+
+function validateFinancialMovement() {
+  if ($("#financial_movement_date").val() == "") {
+    $("#financial_movement_date_validation_msg").html("<%= I18n.t('views.validations.empyt') %>")
+    $("#financial_movement_date").addClass("is-invalid")
+  } else {
+    if ($("#financial_movement_date").hasClass("is-invalid")) {
+      $("#financial_movement_date").removeClass("is-invalid")
+    }
+    $("#financial_movement_date").addClass("is-valid")
+  }
+
+  if ($("#financial_movement_date").val().match(/\d{2}\/\d{2}\/\d{4}/g) == null) {
+    $("#financial_movement_date_validation_msg").html("<%= I18n.t('views.validations.invalid_date') %>")
+    $("#financial_movement_date").addClass("is-invalid")
+  } else {
+    if ($("#financial_movement_date").hasClass("is-invalid")) {
+      $("#financial_movement_date").removeClass("is-invalid")
+    }
+    $("#financial_movement_date").addClass("is-valid")
+  }
+
+  if ($("#financial_movement_amount").val() == "") {
+    $("#financial_movement_amount_validation_msg").html("<%= I18n.t('views.validations.empyt') %>")
+    $("#financial_movement_amount").addClass("is-invalid")
+  } else if ($("#financial_movement_amount").val() < 0.01) {
+    $("#financial_movement_amount_validation_msg").html("<%= I18n.t('views.validations.amount_min_value') %>")
+    $("#financial_movement_amount").addClass("is-invalid")
+  } else {
+    if ($("#financial_movement_amount").hasClass("is-invalid")) {
+      $("#financial_movement_amount").removeClass("is-invalid")
+    }
+    $("#financial_movement_amount").addClass("is-valid")
+  }
+
+  if ($("#financial_movement_financial_movement_kind_id").val() == "") {
+    $("#financial_movement_financial_movement_kind_id_validation_msg").html("<%= I18n.t('views.validations.select') %>")
+    $("#financial_movement_financial_movement_kind_id").addClass("is-invalid")
+  } else {
+    if ($("#financial_movement_financial_movement_kind_id").hasClass("is-invalid")) {
+      $("#financial_movement_financial_movement_kind_id").removeClass("is-invalid")
+    }
+    $("#financial_movement_financial_movement_kind_id").addClass("is-valid")
+  }
+}
+
+$(document).on("turbolinks:load", function () {
+  $("#financial-movement-form").on("ajax:success", function (event) {
+    [data, status, xhr] = event.detail
+    $('#financial-movements-table > tbody').append(xhr.responseText)
+    $('#new-financial-movement-modal').modal('hide')
+    updateDepartmentsOptions()
+  });
+
+  $("#financial-movement-form").on("ajax:error", function (event) {
+    [data, status, xhr] = event.detail
+    var json = JSON.parse(xhr.responseText)
+    console.log(json["errors"])
+    for (var field in json["errors"]) {
+      el = "#financial_movement_" + field
+      msg_el = "#" + field + "_validation_msg"
+      if (!$(el).hasClass("is-invalid")) {
+        $(el).addClass("is-invalid");
+      }
+      $(msg_el).html(json["errors"][field].join("<br>"))
+    }
+  });
+
+  $('#new-financial-movement-modal').on("hidden.bs.modal", function () {
+    $('#new-financial-movement-modal').find(".is-valid").each(function () {
+      $(this).removeClass("is-valid")
+      if (!$(this).is("hidden")) {
+        $(this).val("")
+      }
+    })
+
+    $('#new-financial-movement-modal').find(".is-invalid").each(function () {
+      $(this).removeClass("is-invalid")
+      if (!$(this).is("hidden")) {
+        $(this).val("")
+      }
+    })
+  });
+});
