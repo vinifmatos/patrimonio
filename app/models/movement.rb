@@ -24,7 +24,7 @@ class Movement < ApplicationRecord
 
   def good_is_active
     if good.present?
-      errors.add(:base, :good_inative, good: good.description) if good.inactive?
+      errors.add(:base, :good_inactive, good: good.code) if good.inactive?
     end
   end
 
