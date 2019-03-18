@@ -19,7 +19,7 @@
         <% @good_sub_kinds.each do |good_sub_kind| %>
           <tr>
             <td><%= link_to good_sub_kind.description , good_sub_kind %></td>
-            <td><%= good_sub_kind.good_kind.description %></td>
+            <td><%= good_sub_kind.kind.description %></td>
             <td><%= t_active good_sub_kind.active %></td>
           </tr>
         <% end %>

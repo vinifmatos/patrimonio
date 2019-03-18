@@ -19,7 +19,7 @@ RSpec.describe GoodCategory, type: :model do
     end
 
     it 'without sub kind' do
-      good_category = build(:good_category, good_sub_kind: nil)
+      good_category = build(:good_category, sub_kind: nil)
 
       expect(good_category).to_not be_valid
     end

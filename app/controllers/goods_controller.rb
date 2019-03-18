@@ -2,24 +2,24 @@
 
 class GoodsController < ApplicationController
   before_action :set_good, only: %i[edit update destroy departments]
-  before_action :set_good_categories, only: %i[new edit]
+  before_action :set_categories, only: %i[new edit]
   before_action :set_departments, only: %i[new edit]
   before_action :set_situations, only: %i[new edit]
 
   # GET /goods
   # GET /goods.json
   def index
-    @goods = Good.all.includes(:good_category, :department, :good_situation)
+    @goods = Good.all.includes(:category, :department, :situation)
   end
 
   # GET /goods/1
   # GET /goods/1.json
   def show
     @good = Good.includes(
-      :good_situation,
+      :situation,
       movements: { department: :property },
-      good_category: { good_sub_kind: :good_kind },
-      financial_movements: :financial_movement_kind
+      category: { sub_kind: :kind },
+      financial_movements: :kind
     ).find(params[:id])
 
     set_avaliable_departments
@@ -101,7 +101,7 @@ class GoodsController < ApplicationController
     )
   end
 
-  def set_good_categories
+  def set_categories
     @good_categories = GoodCategory.all.map { |c| [c.description, c.id] }
   end
 

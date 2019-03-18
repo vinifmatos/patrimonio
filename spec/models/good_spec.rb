@@ -37,7 +37,7 @@ RSpec.describe Good, type: :model do
     end
 
     it 'without situation' do
-      good = build(:good, good_situation: nil)
+      good = build(:good, situation: nil)
 
       expect(good).to_not be_valid
     end
@@ -49,7 +49,7 @@ RSpec.describe Good, type: :model do
     end
 
     it 'without category' do
-      good = build(:good, good_category: nil)
+      good = build(:good, category: nil)
 
       expect(good).to_not be_valid
     end
@@ -79,7 +79,7 @@ RSpec.describe Good, type: :model do
       it 'with situation inactive' do
         expect do
           create(:good,
-                 good_situation: GoodSituation
+                 situation: GoodSituation
                       .find(GoodSituation::SITUATIONS[:inactive]))
         end.to raise_error(ActiveRecord::RecordInvalid)
       end
@@ -87,7 +87,7 @@ RSpec.describe Good, type: :model do
       it 'with situation borrowed' do
         expect do
           create(:good,
-                 good_situation: GoodSituation
+                 situation: GoodSituation
                       .find(GoodSituation::SITUATIONS[:borrowed]))
         end.to raise_error(ActiveRecord::RecordInvalid)
       end
@@ -95,7 +95,7 @@ RSpec.describe Good, type: :model do
       it 'with situation maintenance' do
         expect do
           create(:good,
-                 good_situation: GoodSituation
+                 situation: GoodSituation
                       .find(GoodSituation::SITUATIONS[:maintenance]))
         end.to raise_error(ActiveRecord::RecordInvalid)
       end

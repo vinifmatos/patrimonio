@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :good_category do
+  factory :good_category, aliases: [:category] do
     description { Faker::IndustrySegments.industry }
     active { [true, false].sample }
-    good_sub_kind
+    sub_kind { FactoryBot.create(:sub_kind) }
   end
 end

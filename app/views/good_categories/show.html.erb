@@ -10,7 +10,7 @@
   </p>
   <p>
     <strong><%= GoodCategory.human_attribute_name(:good_sub_kind_id) %>:</strong>
-    <%= @good_category.good_sub_kind.description %>
+    <%= @good_category.sub_kind.description %>
   </p>
   <%= link_to t('views.actions.back'), good_categories_path, class: 'btn btn-primary' %>
   <%= link_to t('views.actions.edit'), edit_good_category_path(@good_category), class: 'btn btn-primary' %>

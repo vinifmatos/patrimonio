@@ -4,6 +4,10 @@
     <%= @good.code %>
   </p>
   <p>
+    <strong><%= Good.human_attribute_name(:good_situation_id) %>:</strong>
+    <%= Good.t_situation @good.situation.description %>
+  </p>
+  <p>
     <strong><%= Good.human_attribute_name(:description) %>:</strong>
     <%= @good.description %>
   </p>
@@ -12,28 +16,32 @@
     <%= @good.specification %>
   </p>
   <p>
-    <strong><%= Good.human_attribute_name(:situation) %>:</strong>
-    <%= Good.t_situation @good.good_situation.description %>
+    <strong><%= Good.human_attribute_name(:good_category_id) %>:</strong>
+    <%= @good.category.description %>
   </p>
   <p>
-    <strong><%= Good.human_attribute_name(:purchase_price) %>:</strong>
-    <%= number_with_precision(@good.purchase_price, precision: 2) %>
+    <strong><%= Good.human_attribute_name(:department_id) %>:</strong>
+    <%= @good.department.description %>
   </p>
   <p>
     <strong><%= Good.human_attribute_name(:purchase_date) %>:</strong>
     <%= l @good.purchase_date %>
   </p>
   <p>
+    <strong><%= Good.human_attribute_name(:purchase_price) %>:</strong>
+    <%= number_with_precision(@good.purchase_price, precision: 2) %>
+  </p>
+  <p>
     <strong><%= Good.human_attribute_name(:base_date) %>:</strong>
     <%= l @good.base_date %>
   </p>
   <p>
-    <strong><%= Good.human_attribute_name(:good_category_id) %>:</strong>
-    <%= @good.good_category.description %>
+    <strong><%= Good.human_attribute_name(:depreciated_amount) %>:</strong>
+    <%= number_with_precision(@good.depreciated_amount, precision: 2) %>
   </p>
   <p>
-    <strong><%= Good.human_attribute_name(:department_id) %>:</strong>
-    <%= @good.department.description %>
+    <strong><%= Good.human_attribute_name(:net_amount) %>:</strong>
+    <%= number_with_precision(@good.net_amount, precision: 2) %>
   </p>
   <%= link_to t('views.actions.back'), goods_path, class: 'btn btn-primary' %>
   <%= link_to t('views.actions.edit'), edit_good_path(@good), class: 'btn btn-primary' %>

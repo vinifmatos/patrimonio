@@ -2,13 +2,27 @@
 
 class FinancialMovement < ApplicationRecord
   belongs_to :good
-  belongs_to :financial_movement_kind
+  belongs_to :kind, class_name: :FinancialMovementKind, foreign_key: :financial_movement_kind_id
+
+  scope :initial,
+        lambda {
+          where(financial_movement_kind_id: FinancialMovementKind::KINDS[:initial])
+        }
+  scope :depreciation,
+        lambda {
+          where(financial_movement_kind_id: FinancialMovementKind::KINDS[:depreciation])
+        }
+  scope :revaluation,
+        lambda {
+          where(financial_movement_kind_id: FinancialMovementKind::KINDS[:revaluation])
+        }
 
   before_validation :set_code
   before_validation :set_net_amount
   before_validation :set_depreciated_amount
 
   validates_presence_of :date, :amount
+  validates_presence_of :depreciation_date, if: :depreciation?
   validates_numericality_of :amount, greater_than: 0, unless: :depreciation?
   validates_numericality_of :amount, less_than: 0, if: :depreciation?
   validate :date_validation
@@ -48,13 +62,13 @@ class FinancialMovement < ApplicationRecord
   end
 
   def set_depreciated_amount
-    if financial_movement_kind.present? && good.present? && amount.present?
+    if kind.present? && good.present? && amount.present?
       self.depreciated_amount = if depreciation?
-                                  amount + good.financial_movements.last.depreciated_amount
+                                  amount + good.depreciated_amount
                                 elsif initial?
-                                  amount
+                                  0
                                 else
-                                  good.financial_movements.last.depreciated_amount
+                                  good.depreciated_amount
                                 end
     end
   end
@@ -62,7 +76,7 @@ class FinancialMovement < ApplicationRecord
   def set_net_amount
     if good.present? && amount.present?
       self.net_amount = if revaluation?
-                          amount + good.financial_movements.last.net_amount
+                          amount + good.net_amount
                         elsif initial?
                           amount
                         else
@@ -74,7 +88,7 @@ class FinancialMovement < ApplicationRecord
   def depreciable_amount_validation
     if good.present? && amount.present? && depreciation?
       depreciable_amount =
-        good.depreciable_amount - good.financial_movements.last.depreciated_amount
+        good.depreciable_amount - good.depreciated_amount
       if amount > depreciable_amount
         errors.add(:amount,
                    :greater_than_depreciable_amount,

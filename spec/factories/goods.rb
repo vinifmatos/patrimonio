@@ -7,11 +7,9 @@ FactoryBot.define do
     purchase_price { Faker::Commerce.price(100..10_000.0) }
     purchase_date { Faker::Date.between(60.days.ago, Date.today) }
     base_date { Faker::Date.between(purchase_date, purchase_date.next_day(15)) }
-    good_situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
+    situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
     department
-    good_category
-    # residual_amount { purchase_price * (good_category.good_sub_kind.residual_amount_rate / 100) }
-    # depreciable_amount { purchase_price - residual_amount }
+    category
   end
 
   factory :good_with_base_date_less_than_purchase_date, class: Good do
@@ -20,11 +18,9 @@ FactoryBot.define do
     purchase_price { Faker::Commerce.price(100..10_000.0) }
     purchase_date { Faker::Date.between(60.days.ago, Date.today) }
     base_date { Faker::Date.between(purchase_date.days_ago(10), purchase_date.days_ago(1)) }
-    good_situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
+    situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
     department
-    good_category
-    # residual_amount { purchase_price * (good_category.good_sub_kind.residual_amount_rate / 100) }
-    # depreciable_amount { purchase_price - residual_amount }
+    category
   end
 
   factory :good_without_purchase_date, class: Good do
@@ -32,10 +28,8 @@ FactoryBot.define do
     specification { Faker::Lorem.paragraph_by_chars(256, false) }
     purchase_price { Faker::Commerce.price(100..10_000.0) }
     base_date { Faker::Date.between(Date.today, Date.today.next_day(15)) }
-    good_situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
+    situation { GoodSituation.find(GoodSituation::SITUATIONS[:active]) }
     department
-    good_category
-    # residual_amount { purchase_price * (good_category.good_sub_kind.residual_amount_rate / 100) }
-    # depreciable_amount { purchase_price - residual_amount }
+    category
   end
 end

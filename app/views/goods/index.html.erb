@@ -25,7 +25,7 @@
             <td><%= link_to good.description, good %></td>
             <td><%= number_with_precision(good.purchase_price, precision: 2) %></td>
             <td><%= l(good.purchase_date) %></td>
-            <td><%= good.good_category.description %></td>
+            <td><%= good.category.description %></td>
             <td><%= good.department.description %></td>
           </tr>
         <% end %>

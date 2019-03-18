@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class Good < ApplicationRecord
-  belongs_to :good_category
+  include Depreciation
+
+  belongs_to :category, class_name: :GoodCategory, foreign_key: :good_category_id
   belongs_to :department
-  belongs_to :good_situation
+  belongs_to :situation, class_name: :GoodSituation, foreign_key: :good_situation_id
   has_many :movements, -> { order(:date, :created_at) }
   has_many :financial_movements, -> { order(:date, :created_at) }
   after_create :create_initial_movement
@@ -12,6 +14,7 @@ class Good < ApplicationRecord
   before_validation :set_code
   before_validation :set_residual_amount
   before_validation :set_depreciable_amount
+  before_validation :set_depreciation_method
 
   validates_presence_of :description,
                         :code,
@@ -19,7 +22,8 @@ class Good < ApplicationRecord
                         :purchase_date,
                         :purchase_price,
                         :residual_amount,
-                        :depreciable_amount
+                        :depreciable_amount,
+                        :depreciation_method
   validates_uniqueness_of :code
   validates_numericality_of :purchase_price, greater_than: 0
 
@@ -44,6 +48,34 @@ class Good < ApplicationRecord
 
   def maintenance?
     good_situation_id == GoodSituation::SITUATIONS[:maintenance]
+  end
+
+  def depreciated_amount
+    financial_movements.last.depreciated_amount
+  end
+
+  def net_amount
+    financial_movements.last.net_amount
+  end
+
+  def last_financial_movement
+    financial_movements.last
+  end
+
+  def deactivation
+    movements.deactivation.last
+  end
+
+  def yearly_depreciation_rate
+    category.sub_kind.yearly_depreciation_rate
+  end
+
+  def lifespan
+    category.sub_kind.lifespan
+  end
+
+  def last_depreciation
+    financial_movements.depreciation.last
   end
 
   private
@@ -87,9 +119,9 @@ class Good < ApplicationRecord
   end
 
   def set_residual_amount
-    if purchase_price.present? && good_category.present?
+    if purchase_price.present? && category.present?
       self.residual_amount ||= purchase_price * (
-        good_category.good_sub_kind.residual_amount_rate / 100)
+        category.sub_kind.residual_amount_rate / 100)
     end
   end
 
@@ -97,5 +129,9 @@ class Good < ApplicationRecord
     if purchase_price.present? && residual_amount.present?
       self.depreciable_amount ||= purchase_price - residual_amount
     end
+  end
+
+  def set_depreciation_method
+    self.depreciation_method ||= category.sub_kind.depreciation_method if category.try(:sub_kind).present?
   end
 end

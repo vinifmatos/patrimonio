@@ -10,7 +10,7 @@
   </p>
   <p>
     <strong><%= GoodSubKind.human_attribute_name(:good_kind_id) %>:</strong>
-    <%= @good_sub_kind.good_kind.description %>
+    <%= @good_sub_kind.kind.description %>
   </p>
   <%= link_to t('views.actions.back'), good_sub_kinds_path, class: 'btn btn-primary' %>
   <%= link_to t('views.actions.edit'), edit_good_sub_kind_path(@good_sub_kind), class: 'btn btn-primary' %>

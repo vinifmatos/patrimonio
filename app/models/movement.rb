@@ -3,7 +3,9 @@
 class Movement < ApplicationRecord
   belongs_to :good
   belongs_to :department
-  belongs_to :movement_kind
+  belongs_to :kind, class_name: :MovementKind, foreign_key: :movement_kind_id
+
+  scope :deactivation, -> { where(movement_kind_id: MovementKind::KINDS[:deactivation]) }
 
   validates_presence_of :date, :department_id, :movement_kind_id, :good_id
   validates :code, uniqueness: { scope: :good_id }

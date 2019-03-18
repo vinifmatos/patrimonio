@@ -15,6 +15,8 @@ pt-BR:
         base_date: Data Base
         department_id: Departamento
         good_category_id: Categoria
+        depreciated_amount: Valor Depreciado
+        net_amount: Valor Líquido
       good/situations:
         active: Ativo
         inactive: Inativo

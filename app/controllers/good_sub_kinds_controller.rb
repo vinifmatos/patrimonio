@@ -7,7 +7,7 @@ class GoodSubKindsController < ApplicationController
   # GET /good_sub_kinds
   # GET /good_sub_kinds.json
   def index
-    @good_sub_kinds = GoodSubKind.all.includes(:good_kind)
+    @good_sub_kinds = GoodSubKind.all.includes(:kind)
   end
 
   # GET /good_sub_kinds/1

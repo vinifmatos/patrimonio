@@ -22,7 +22,7 @@ RSpec.describe FinancialMovement, type: :model do
 
     it 'without kind' do
       good = create(:good)
-      financial_movement = build(:financial_movement, good: good, financial_movement_kind: nil)
+      financial_movement = build(:financial_movement, good: good, kind: nil)
 
       expect(financial_movement).to_not be_valid
     end
@@ -54,7 +54,7 @@ RSpec.describe FinancialMovement, type: :model do
       financial_movement = build(:financial_movement,
                                  good: good,
                                  amount: -1,
-                                 financial_movement_kind: FinancialMovementKind.find(
+                                 kind: FinancialMovementKind.find(
                                    FinancialMovementKind::KINDS[:initial]
                                  ))
 
@@ -66,7 +66,7 @@ RSpec.describe FinancialMovement, type: :model do
       financial_movement = build(:financial_movement,
                                  good: good,
                                  amount: -1,
-                                 financial_movement_kind: FinancialMovementKind.find(
+                                 kind: FinancialMovementKind.find(
                                    FinancialMovementKind::KINDS[:revaluation]
                                  ))
 
@@ -78,7 +78,7 @@ RSpec.describe FinancialMovement, type: :model do
       financial_movement = build(:financial_movement,
                                  good: good,
                                  amount: 1,
-                                 financial_movement_kind: FinancialMovementKind.find(
+                                 kind: FinancialMovementKind.find(
                                    FinancialMovementKind::KINDS[:depreciation]
                                  ))
 
@@ -90,7 +90,7 @@ RSpec.describe FinancialMovement, type: :model do
       financial_movement = build(:financial_movement,
                                  good: good,
                                  amount: good.depreciable_amount + 1,
-                                 financial_movement_kind: FinancialMovementKind.find(
+                                 kind: FinancialMovementKind.find(
                                    FinancialMovementKind::KINDS[:depreciation]
                                  ))
 
