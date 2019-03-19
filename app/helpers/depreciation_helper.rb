@@ -1,0 +1,2 @@
+module DepreciationHelper
+end

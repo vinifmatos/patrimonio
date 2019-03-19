@@ -1,0 +1,5 @@
+pt-BR:
+  views:
+    depreciation:
+      title: Depreciação
+      select: Selecionar

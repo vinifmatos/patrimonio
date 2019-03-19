@@ -17,6 +17,8 @@ pt-BR:
         good_category_id: Categoria
         depreciated_amount: Valor Depreciado
         net_amount: Valor Líquido
+        last_depreciation_date: Data da Última Depreciação
+        last_depreciation: Última Depreciação
       good/situations:
         active: Ativo
         inactive: Inativo

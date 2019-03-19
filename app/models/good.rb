@@ -6,6 +6,9 @@ class Good < ApplicationRecord
   belongs_to :category, class_name: :GoodCategory, foreign_key: :good_category_id
   belongs_to :department
   belongs_to :situation, class_name: :GoodSituation, foreign_key: :good_situation_id
+
+  scope :active, -> { where(situation: GoodSituation.active) }
+
   has_many :movements, -> { order(:date, :created_at) }
   has_many :financial_movements, -> { order(:date, :created_at) }
   after_create :create_initial_movement
