@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2019_03_18_004857) do
     t.integer "code", null: false
     t.decimal "depreciated_amount", precision: 15, scale: 2, default: "0.0", null: false
     t.decimal "net_amount", precision: 15, scale: 2, null: false
-    t.date "depreciation_date"
     t.index ["financial_movement_kind_id"], name: "index_financial_movements_on_financial_movement_kind_id"
     t.index ["good_id", "code"], name: "index_financial_movements_on_good_id_and_code", unique: true
     t.index ["good_id"], name: "index_financial_movements_on_good_id"

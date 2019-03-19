@@ -111,4 +111,47 @@ RSpec.describe Good, type: :model do
       expect { create(:good) }.to change(FinancialMovement, :count).by(1)
     end
   end
+
+  context 'depreciation' do
+    let(:date) { Date.today }
+    let(:sub_kind) do
+      create(:sub_kind,
+             lifespan: 60,
+             residual_amount_rate: 0.1,
+             yearly_depreciation_rate: 0.2,
+             depreciation_method: Depreciation::METHODS[:constant_quotas])
+    end
+    let(:category) { create(:category, sub_kind: sub_kind) }
+
+    it 'first depreciation with 12 months' do
+      good = create(:good,
+                    base_date: date,
+                    purchase_date: date,
+                    purchase_price: 2600,
+                    category: category,
+                    situation: GoodSituation.active)
+      depreciation_movement = good.depreciate(date.next_month(12))
+
+      expect(depreciation_movement.amount.to_f).to eq(-468)
+      expect(depreciation_movement.kind).to eq(FinancialMovementKind.depreciation)
+      expect(depreciation_movement.net_amount.to_f).to eq(2600 - 468)
+      expect(depreciation_movement.depreciated_amount.to_f).to eq(468)
+    end
+
+    it 'second depreciation with 12 months' do
+      good = create(:good,
+                    base_date: date,
+                    purchase_date: date,
+                    purchase_price: 2600,
+                    category: category,
+                    situation: GoodSituation.active)
+      good.depreciate(date.next_month(12))
+      depreciation_movement = good.depreciate(date.next_month(12))
+
+      expect(depreciation_movement.amount.to_f).to eq(-468)
+      expect(depreciation_movement.kind).to eq(FinancialMovementKind.depreciation)
+      expect(depreciation_movement.net_amount.to_f).to eq(2600 - 468 * 2)
+      expect(depreciation_movement.depreciated_amount.to_f).to eq(468 * 2)
+    end
+  end
 end

@@ -33,29 +33,34 @@ module Depreciation
         unitis_produced
       end
 
-      if @depreciation_movement.save
-        @depreciation_movement
-      else
-        @depreciation_movement.errors
-      end
+      @depreciation_movement.save
+      @depreciation_movement
     end
 
     private
 
     def constant_quotas
-      months_to_depreciate =
-        Utils.months_between(@good.base_date, @good.base_date.next_month(lifespan)) -
-        Utils.months_between(@movement_date, (last_depreciation.try(:depreciation_date) || @good.base_date))
-      monthly_depreciation_rate = yearly_depreciation_rate / 12
+      monthly_depreciation_rate = @good.yearly_depreciation_rate / 12
       percentage_to_depreciate = months_to_depreciate * monthly_depreciation_rate
 
-      @depreciation_movement.amount = depreciable_amount * percentage_to_depreciate
-      @depreciation_movement.depreciated_amount = @depreciation_movement.amount + (@last_depreciation.try(:depreciated_amount) || 0)
-      @depreciation_movement.net_amount = (last_financial_movement.try(:net_amount) || 0) - @depreciation_movement.amount
+      @depreciation_movement.amount = @good.depreciable_amount * percentage_to_depreciate * -1
+      @depreciation_movement.net_amount = (@good.last_financial_movement.try(:net_amount) || 0) + @depreciation_movement.amount
+      @depreciation_movement.depreciated_amount = @depreciation_movement.amount.abs + @good.depreciated_amount
     end
 
     def digits_sum; end
 
     def unitis_produced; end
+
+    def months_to_depreciate
+      deprecited_months = Utils.months_between(@good.base_date, (@last_depreciation.try(:depreciation_date) || @good.base_date))
+      not_deprecited_months = @good.lifespan - deprecited_months
+      months = Utils.months_between(@movement_date, (@last_depreciation.try(:depreciation_date) || @good.base_date))
+      if months <= not_deprecited_months
+        months
+      else
+        not_deprecited_months
+      end
+    end
   end
 end

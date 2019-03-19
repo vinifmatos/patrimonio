@@ -6,4 +6,20 @@ class GoodSituation < ApplicationRecord
   def self.t(situation)
     I18n.t "activerecord.attributes.good/situations.#{situation}"
   end
+
+  def self.active
+    where(description: :active).first
+  end
+
+  def self.inactive
+    where(description: :inactive).first
+  end
+
+  def self.borrowed
+    where(description: :borrowed).first
+  end
+
+  def self.maintenance
+    where(description: :maintenance).first
+  end
 end

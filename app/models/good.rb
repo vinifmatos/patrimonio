@@ -120,8 +120,8 @@ class Good < ApplicationRecord
 
   def set_residual_amount
     if purchase_price.present? && category.present?
-      self.residual_amount ||= purchase_price * (
-        category.sub_kind.residual_amount_rate / 100)
+      self.residual_amount ||= purchase_price *
+                               category.sub_kind.residual_amount_rate
     end
   end
 
