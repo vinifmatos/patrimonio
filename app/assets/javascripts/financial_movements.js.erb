@@ -71,8 +71,10 @@ $(document).on("turbolinks:load", function () {
     var json = JSON.parse(xhr.responseText)
     console.log(json["errors"])
     for (var field in json["errors"]) {
+      console.log(field)
       el = "#financial_movement_" + field
-      msg_el = "#" + field + "_validation_msg"
+      msg_el = el + "_validation_msg"
+      console.log(msg_el)
       if (!$(el).hasClass("is-invalid")) {
         $(el).addClass("is-invalid");
       }

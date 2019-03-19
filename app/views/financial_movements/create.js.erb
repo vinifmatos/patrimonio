@@ -1,1 +1,1 @@
-"<tr><td><%= @financial_movement.code %></td><td><%= l @financial_movement.date %></td><td><%= FinancialMovementKind.t @financial_movement.financial_movement_kind.description %></td><td><%= number_with_precision(@financial_movement.amount, precision: 2) %></td></tr>"
+"<tr><td><%= @financial_movement.code %></td><td><%= l @financial_movement.date %></td><td><%= FinancialMovementKind.t @financial_movement.kind.description %></td><td><%= number_with_precision(@financial_movement.amount, precision: 2) %></td></tr>"

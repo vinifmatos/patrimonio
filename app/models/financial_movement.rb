@@ -34,7 +34,7 @@ class FinancialMovement < ApplicationRecord
     if good.present? && date.present?
       last_date = good.financial_movements.last.date
       if last_date > date
-        errors.add(:date, :date_less_than_last_move, date: last_date)
+        errors.add(:date, :date_less_than_last_move, date: I18n.l(last_date))
       end
     end
   end
@@ -78,7 +78,8 @@ class FinancialMovement < ApplicationRecord
       if amount.abs > depreciable_amount
         errors.add(:amount,
                    :greater_than_depreciable_amount,
-                   depreciable_amount: depreciable_amount)
+                   depreciable_amount: number_with_precision(depreciable_amount,
+                                                             precision: 2))
       end
     end
   end

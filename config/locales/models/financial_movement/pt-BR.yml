@@ -16,6 +16,6 @@ pt-BR:
         code: Código
     errors:
       messages:
-        date_less_than_last_move: Data não pode ser menor que %{date}
+        date_less_than_last_move: A Data não pode ser menor que %{date}
         good_inative: O Bem está inativo
         greater_than_depreciable_amount: O valor da depreciação não pode ser maior que %{depreciable_amount}
