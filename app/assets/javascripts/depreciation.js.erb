@@ -9,11 +9,15 @@ $(document).on('turbolinks:load', function () {
 });
 
 $(document).on('turbolinks:load', function () {
-  $("#depreciable_goods > tbody > tr > td").on("dbclick", function () {
-    if ($(this).parent().children("td > input").prop("checked")) {
-      $(this).parent().addClass("table-primary")
+  $("#depreciable_goods tbody tr").dblclick(function () {
+    if (!$(this).children("td:first").children("input").prop("checked")) {
+      $(this).children("td:first").children("input")
+      console.log("t")
+      $(this).addClass("table-primary")
     } else {
-      $(this.parent()).removeClass("table-primary")
+      console.log($(this).children("td:first"))
+      $(this).removeClass("table-primary")
     }
+    console.log(this)
   })
 })
