@@ -34,3 +34,7 @@ body {
 .datepicker-input {
   max-width: 9em;
 }
+
+select {
+  max-width: fit-content;
+}

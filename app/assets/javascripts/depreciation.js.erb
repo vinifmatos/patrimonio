@@ -16,3 +16,15 @@
 //     }
 //   });
 // });
+
+$(document).on('turbolinks:load', function () {
+  $("select#kind").change(function () {
+    if ($(this).val() != "") {
+      console.log("s")
+      $("div#sub_kind_group").show()
+    } else {
+      console.log("h")
+      $("div#sub_kind_group").hide()
+    }
+  })
+});

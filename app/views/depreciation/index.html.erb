@@ -9,6 +9,19 @@
         <%= datepicker_field(:movement_date) %>
         <%= submit_tag t('views.depreciation.actions.depreciate'), class: 'btn btn-primary ml-2' %>
       <% end %>
+      <%= form_tag depreciation_path do |f| %>
+        <div class="form-group">
+          <%= label_tag :kind, t('activerecord.models.good_kind.one') %>
+          <%= select_tag :kind, options_for_select(@kinds), prompt: t('views.all'), class: 'form-control' %>
+        </div>
+        <div id="sub_kind_group" class="form-group" style="display: none;">
+          <%= label_tag :sub_kind, t('activerecord.models.good_sub_kind.one') %>
+          <%= select_tag :sub_kind, nil, prompt: t('views.all'), class: 'form-control' %>
+        </div>
+        <div class="actions">
+          <%= submit_tag t('views.depreciation.actions.depreciate'), class: 'btn btn-primary' %>
+        </div>
+      <% end %>
       <table id="depreciable_goods" class="table table-bordered table-hover mt-4">
         <thead>
           <tr>
