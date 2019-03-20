@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_004857) do
+ActiveRecord::Schema.define(version: 2019_03_20_001440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,9 @@ ActiveRecord::Schema.define(version: 2019_03_18_004857) do
     t.decimal "residual_amount", precision: 15, scale: 2, null: false
     t.decimal "depreciable_amount", precision: 15, scale: 2, null: false
     t.integer "depreciation_method", null: false
+    t.date "last_depreciation"
+    t.decimal "depreciated_amount", precision: 15, scale: 2, default: "0.0", null: false
+    t.decimal "net_amount", precision: 15, scale: 2, null: false
     t.index ["code"], name: "index_goods_on_code", unique: true
     t.index ["department_id"], name: "index_goods_on_department_id"
     t.index ["good_category_id"], name: "index_goods_on_good_category_id"

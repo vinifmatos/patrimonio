@@ -14,7 +14,7 @@ module Depreciation
     def initialize(good, movement_date)
       @good = good
       @movement_date = movement_date
-      @last_depreciation = @good.last_depreciation
+      @last_depreciation = @good.last_depreciation_movement
       @depreciation_movement = FinancialMovement.new(
         good: @good,
         financial_movement_kind_id: FinancialMovementKind::KINDS[:depreciation],
@@ -33,7 +33,13 @@ module Depreciation
         unitis_produced
       end
 
-      @depreciation_movement.save
+      if @depreciation_movement.save
+        @good.update(
+          last_depreciation: @movement_date,
+          net_amount: @depreciation_movement.net_amount,
+          depreciated_amount: @depreciation_movement.depreciated_amount
+        )
+      end
       @depreciation_movement
     end
 

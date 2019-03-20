@@ -1,31 +1,40 @@
 <div class="container">
-  <h1><%= t 'views.depreciation.title' %></h1>
-  <table id="depreciable_goods" class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th><%= t 'views.depreciation.select' %></th>
-        <th><%= @goods.human_attribute_name(:code) %></th>
-        <th><%= @goods.human_attribute_name(:description) %></th>
-        <th><%= @goods.human_attribute_name(:base_date) %></th>
-        <th><%= @goods.human_attribute_name(:last_depreciation) %></th>
-        <th><%= @goods.human_attribute_name(:purchase_price) %></th>
-        <th><%= @goods.human_attribute_name(:depreciated_amount) %></th>
-        <th><%= @goods.human_attribute_name(:net_amount) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @goods.each do |good| %>
-        <tr>
-          <td class="text-center"><%= check_box_tag 'select', 0 %></td>
-          <td><%= good.code %></td>
-          <td><%= link_to good.description, good %></td>
-          <td><%= l(good.base_date) %></td>
-          <td><%= l(good.last_depreciation.date) if good.last_depreciation %></td>
-          <td><%= number_with_precision(good.purchase_price, precision: 2) %></td>
-          <td><%= number_with_precision(good.depreciated_amount, precision: 2) %></td>
-          <td><%= number_with_precision(good.net_amount, precision: 2) %></td>
-        </tr>
+  <div class="card mt-3">
+    <div class="card-header">
+      <h1><%= t 'views.depreciation.title' %></h1>
+    </div>
+    <div class="card-body">
+      <%= form_tag depreciation_path, class: 'form-inline' do |f| %>
+        <%= label_tag :movement_date, t('views.depreciation.form.fields.movement_date'), class: 'my-1 mr-2' %>
+        <%= datepicker_field(:movement_date) %>
+        <%= submit_tag t('views.depreciation.actions.depreciate'), class: 'btn btn-primary ml-2' %>
       <% end %>
-    </tbody>
-  </table>
+      <table id="depreciable_goods" class="table table-bordered table-hover mt-4">
+        <thead>
+          <tr>
+            <th><%= @goods.human_attribute_name(:code) %></th>
+            <th><%= @goods.human_attribute_name(:description) %></th>
+            <th><%= @goods.human_attribute_name(:base_date) %></th>
+            <th><%= @goods.human_attribute_name(:last_depreciation) %></th>
+            <th><%= @goods.human_attribute_name(:purchase_price) %></th>
+            <th><%= @goods.human_attribute_name(:depreciated_amount) %></th>
+            <th><%= @goods.human_attribute_name(:net_amount) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @goods.each do |good| %>
+            <tr>
+              <td><%= good.code %></td>
+              <td><%= link_to good.description, good %></td>
+              <td><%= l(good.base_date) %></td>
+              <td><%= ldate(good.last_depreciation) %></td>
+              <td><%= number_with_precision(good.purchase_price, precision: 2) %></td>
+              <td><%= number_with_precision(good.depreciated_amount, precision: 2) %></td>
+              <td><%= number_with_precision(good.net_amount, precision: 2) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

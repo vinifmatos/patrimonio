@@ -5,16 +5,36 @@ module ApplicationHelper
     I18n.t "views.active.#{active}"
   end
 
-  def datepicker_field(form, field, options = {}, &block)
+  def form_datepicker_field(form, field, options = {}, &block)
     content_tag(:div, class: 'input-group date-input-group') do
       content = form.text_field(field,
                                 value: (I18n.l(eval("form.object.#{field}")) if eval("form.object.#{field}.present?")),
-                                class: "form-control datepicker-input #{options[:class]}", required: (options[:required] || false)) +
-                content_tag(:div, class: 'input-group-append') do
-                  button_tag(fa_icon('calendar'),
-                             class: 'btn btn-outline-secondary btn-datepicker', type: 'button')
-                end
+                                class: "form-control datepicker-input #{options[:class]}", required: (options[:required] || false))
+      content += content_tag(:div, class: 'input-group-append') do
+        button_tag(fa_icon('calendar'),
+                   class: 'btn btn-outline-secondary btn-datepicker', type: 'button')
+      end
       content + capture(&block) if block_given?
+      content
     end
+  end
+
+  def datepicker_field(field, options = {}, &block)
+    content_tag(:div, class: 'input-group date-input-group') do
+      content = text_field_tag(field,
+                               nil,
+                               class: "form-control datepicker-input #{options[:class]}")
+      puts content
+      content += content_tag(:div, class: 'input-group-append') do
+        button_tag(fa_icon('calendar'),
+                   class: 'btn btn-outline-secondary btn-datepicker', type: 'button')
+      end
+      content + capture(&block) if block_given?
+      content
+    end
+  end
+
+  def ldate(date)
+    l(date) if date
   end
 end

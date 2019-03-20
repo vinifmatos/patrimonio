@@ -1,23 +1,18 @@
-$(document).on('turbolinks:load', function () {
-  $("#depreciable_goods > tbody > tr > td > input").change(function () {
-    if ($(this).prop("checked")) {
-      $(this).parent().parent().addClass("table-primary")
-    } else {
-      $(this).parent().parent().removeClass("table-primary")
-    }
-  });
-});
+// $(document).on('turbolinks:load', function () {
+//   $("#depreciable_goods tbody tr td input").change(function () {
+//     if ($(this).prop("checked")) {
+//       $(this).parent().parent().addClass("table-primary")
+//     } else {
+//       $(this).parent().parent().removeClass("table-primary")
+//     }
+//   });
+// });
 
-$(document).on('turbolinks:load', function () {
-  $("#depreciable_goods tbody tr").dblclick(function () {
-    if (!$(this).children("td:first").children("input").prop("checked")) {
-      $(this).children("td:first").children("input")
-      console.log("t")
-      $(this).addClass("table-primary")
-    } else {
-      console.log($(this).children("td:first"))
-      $(this).removeClass("table-primary")
-    }
-    console.log(this)
-  })
-})
+// $(document).on('turbolinks:load', function () {
+//   $("#depreciable_goods > tbody >  tr").each(function () {
+//     console.log(this)
+//     if ($(this).children("td").children("input").prop("checked")) {
+//       $(this).addClass("table-primary")
+//     }
+//   });
+// });

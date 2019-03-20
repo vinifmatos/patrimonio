@@ -7,7 +7,7 @@ class Good < ApplicationRecord
   belongs_to :department
   belongs_to :situation, class_name: :GoodSituation, foreign_key: :good_situation_id
 
-  scope :active, -> { where(situation: GoodSituation.active) }
+  scope :active, -> { where(good_situation_id: GoodSituation::SITUATIONS[:active]) }
 
   has_many :movements, -> { order(:date, :created_at) }
   has_many :financial_movements, -> { order(:date, :created_at) }
@@ -18,6 +18,7 @@ class Good < ApplicationRecord
   before_validation :set_residual_amount
   before_validation :set_depreciable_amount
   before_validation :set_depreciation_method
+  before_validation :set_net_amount, on: :create
 
   validates_presence_of :description,
                         :code,
@@ -26,7 +27,9 @@ class Good < ApplicationRecord
                         :purchase_price,
                         :residual_amount,
                         :depreciable_amount,
-                        :depreciation_method
+                        :depreciation_method,
+                        :net_amount,
+                        :depreciated_amount
   validates_uniqueness_of :code
   validates_numericality_of :purchase_price, greater_than: 0
 
@@ -53,14 +56,6 @@ class Good < ApplicationRecord
     good_situation_id == GoodSituation::SITUATIONS[:maintenance]
   end
 
-  def depreciated_amount
-    financial_movements.last.depreciated_amount
-  end
-
-  def net_amount
-    financial_movements.last.net_amount
-  end
-
   def last_financial_movement
     financial_movements.last
   end
@@ -77,7 +72,7 @@ class Good < ApplicationRecord
     category.sub_kind.lifespan
   end
 
-  def last_depreciation
+  def last_depreciation_movement
     financial_movements.depreciation.last
   end
 
@@ -136,5 +131,9 @@ class Good < ApplicationRecord
 
   def set_depreciation_method
     self.depreciation_method ||= category.sub_kind.depreciation_method if category.try(:sub_kind).present?
+  end
+
+  def set_net_amount
+    self.net_amount = purchase_price if purchase_price
   end
 end

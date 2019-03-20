@@ -11,7 +11,7 @@
         <div class="modal-body">
           <div class="form-group">
             <%= form.label :date %>
-            <%= datepicker_field(form, :date) do %>
+            <%= form_datepicker_field(form, :date) do %>
               <div id="date_validation_msg" class='invalid-feedback'>
               </div>
             <% end %>
