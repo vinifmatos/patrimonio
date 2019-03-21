@@ -8,3 +8,6 @@ pt-BR:
       form:
         fields:
           movement_date: Data
+      loading_text:
+        sub_kinds: Carregando Sub Tipos...
+        categories: Carregando Categorias...

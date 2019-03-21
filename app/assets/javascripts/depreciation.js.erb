@@ -1,30 +1,33 @@
-// $(document).on('turbolinks:load', function () {
-//   $("#depreciable_goods tbody tr td input").change(function () {
-//     if ($(this).prop("checked")) {
-//       $(this).parent().parent().addClass("table-primary")
-//     } else {
-//       $(this).parent().parent().removeClass("table-primary")
-//     }
-//   });
-// });
-
-// $(document).on('turbolinks:load', function () {
-//   $("#depreciable_goods > tbody >  tr").each(function () {
-//     console.log(this)
-//     if ($(this).children("td").children("input").prop("checked")) {
-//       $(this).addClass("table-primary")
-//     }
-//   });
-// });
-
 $(document).on('turbolinks:load', function () {
   $("select#kind").change(function () {
     if ($(this).val() != "") {
-      console.log("s")
+      $("select#sub_kind").append('<option value=""><%= I18n.t('views.depreciation.loading_text.sub_kinds') %></option>')
       $("div#sub_kind_group").show()
+      $.get("/depreciation/get_sub_kinds", { kind: $(this).val() }).done(function (data) {
+        $("select#sub_kind").empty()
+        $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
+        $("select#sub_kind").append(data)
+      })
     } else {
-      console.log("h")
-      $("div#sub_kind_group").hide()
+      $("select#sub_kind").empty()
+      $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
+    }
+  })
+});
+
+$(document).on('turbolinks:load', function () {
+  $("select#sub_kind").change(function () {
+    if ($(this).val() != "") {
+      $("select#sub_sub_kind").append('<option value=""><%= I18n.t('views.depreciation.loading_text.categories') %></option>')
+      $("div#sub_kind_group").show()
+      $.get("/depreciation/get_categories", { sub_kind: $(this).val() }).done(function (data) {
+        $("select#category").empty()
+        $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
+        $("select#category").append(data)
+      })
+    } else {
+      $("select#category").empty()
+      $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
     }
   })
 });

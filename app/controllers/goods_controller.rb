@@ -102,7 +102,7 @@ class GoodsController < ApplicationController
   end
 
   def set_categories
-    @good_categories = GoodCategory.all.map { |c| [c.description, c.id] }
+    @categories = GoodCategory.all.map { |c| [c.description, c.id] }
   end
 
   def set_departments

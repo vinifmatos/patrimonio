@@ -24,7 +24,6 @@ module ApplicationHelper
       content = text_field_tag(field,
                                nil,
                                class: "form-control datepicker-input #{options[:class]}")
-      puts content
       content += content_tag(:div, class: 'input-group-append') do
         button_tag(fa_icon('calendar'),
                    class: 'btn btn-outline-secondary btn-datepicker', type: 'button')
