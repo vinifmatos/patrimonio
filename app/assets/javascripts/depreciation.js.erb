@@ -29,6 +29,8 @@ $(document).on('turbolinks:load', function () {
       var options = $(sub_kinds).filter("optgroup[label=" + kind + "]").html();
       $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
       $('select#sub_kind').append(options);
+      $("select#category").empty()
+      $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
     } else {
       $("select#sub_kind").empty()
       $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
