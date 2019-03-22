@@ -4,34 +4,17 @@
       <h1><%= t 'views.depreciation.title' %></h1>
     </div>
     <div class="card-body">
-      <%= form_tag depreciation_path, class: 'form-inline' do |f| %>
+      <%= form_tag depreciation_path, class: 'form-inline mb-3' do |f| %>
         <%= label_tag :movement_date, t('views.depreciation.form.fields.movement_date'), class: 'my-1 mr-2' %>
         <%= datepicker_field(:movement_date) %>
         <%= submit_tag t('views.depreciation.actions.depreciate'), class: 'btn btn-primary ml-2' %>
       <% end %>
-      <%= form_tag depreciation_path, method: :get do |f| %>
-        <div class="row no-gutters">
+      <%= button_tag t('views.depreciation.filters.show'), id: 'btn_toggle_filters' ,data: { toggle: 'collapse', target: 'div#filters' }, aria: { expanded: 'false', controls: 'filters'}, class: 'btn btn-primary' %>
+      <div class="collapse" id="filters">
+        <div class="card card-body">
+          <%= render 'depreciation/filters_form', kinds: @kinds, sub_kinds: @sub_kinds, categories: @categories %>
         </div>
-        <div class="form-group">
-          <%= label_tag :kind, t('activerecord.models.good_kind.one') %>
-          <%= select_tag :kind, options_for_select(@kinds), selected: params[:kind], prompt: t('views.all.male'), class: 'form-control' %>
-        </div>
-        <div id="sub_kind_group" class="form-group">
-          <%= label_tag :sub_kind, t('activerecord.models.good_sub_kind.one') %>
-          <%= select_tag :sub_kind, grouped_options_for_select(@sub_kinds), prompt: t('views.all.male'), class: 'form-control' %>
-        </div>
-        <div id="category_group" class="form-group">
-          <%= label_tag :category, t('activerecord.models.good_category.one') %>
-          <%= select_tag :category, grouped_options_for_select(@categories), prompt: t('views.all.female'), class: 'form-control' %>
-        </div>
-        <div id="goods_group" class="form-group">
-          <%= label_tag :goods, t('activerecord.models.good.other') %>
-          <%= text_field_tag :goods, nil, class: 'form-control wd-2' %>
-        </div>
-        <div class="actions">
-          <%= submit_tag t('views.depreciation.actions.filter'), class: 'btn btn-primary' %>
-        </div>
-      <% end %>
+      </div>
       <table id="depreciable_goods" class="table table-bordered table-hover mt-4">
         <thead>
           <tr>

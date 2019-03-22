@@ -64,3 +64,14 @@ $(document).on('turbolinks:load', function () {
     }
   });
 });
+
+
+$(document).on('turbolinks:load', function () {
+  $('div#filters').on('shown.bs.collapse', function () {
+    $('button#btn_toggle_filters').text('<%= I18n.t('views.depreciation.filters.hide') %>')
+  });
+
+  $('div#filters').on('hidden.bs.collapse', function () {
+    $('button#btn_toggle_filters').text('<%= I18n.t('views.depreciation.filters.show') %>')
+  });
+});

@@ -12,3 +12,6 @@ pt-BR:
       loading_text:
         sub_kinds: Carregando Sub Tipos...
         categories: Carregando Categorias...
+      filters:
+        show: Filtros
+        hide: Ocultar Filtros
