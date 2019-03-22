@@ -24,6 +24,10 @@
           <%= label_tag :category, t('activerecord.models.good_category.one') %>
           <%= select_tag :category, grouped_options_for_select(@categories), prompt: t('views.all.female'), class: 'form-control' %>
         </div>
+        <div id="goods_group" class="form-group">
+          <%= label_tag :goods, t('activerecord.models.good.other') %>
+          <%= text_field_tag :goods, nil, class: 'form-control wd-2' %>
+        </div>
         <div class="actions">
           <%= submit_tag t('views.depreciation.actions.filter'), class: 'btn btn-primary' %>
         </div>
