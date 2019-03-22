@@ -5,6 +5,7 @@ pt-BR:
       actions:
         depreciate: Depreciar
         select: Selecionar
+        filter: Filtrar
       form:
         fields:
           movement_date: Data

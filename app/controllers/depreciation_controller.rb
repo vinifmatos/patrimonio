@@ -9,20 +9,15 @@ class DepreciationController < ApplicationController
       categories = params[:category].blank? ? GoodCategory.where(good_sub_kind_id: sub_kinds).pluck(:id) : params[:category]
       @goods = Good.active.where(good_category_id: (params[:category].blank? ? categories : params[:category])).order(:code)
     end
+
     @kinds = (GoodKind.all.select(:id, :description).map { |k| [k.description, k.id] }).sort
 
-    @categories = (GoodSubKind.select(:id).map { |sk| { "#{sk.id}": [GoodCategory.where(good_sub_kind_id: sk.id).select(:id, :description).map { |c| [c.description, c.id] }] } }).to_json
-  end
+    @sub_kinds = (GoodKind.all.includes(:sub_kinds).map do |k|
+      [k.id, k.sub_kinds.map { |sk| [sk.description, sk.id] }.sort]
+    end).sort
 
-  def get_sub_kinds
-    @sub_kinds = (GoodSubKind
-      .where(good_kind_id: params[:kind])
-      .select(:id, :description).map { |sk| [sk.description, sk.id] }).sort
-  end
-
-  def get_categories
-    @categories = (GoodCategory
-      .where(good_sub_kind_id: params[:sub_kind])
-      .select(:id, :description).map { |c| [c.description, c.id] }).sort
+    @categories = (GoodSubKind.all.includes(:categories).map do |sk|
+      [sk.id, sk.categories.map { |c| [c.description, c.id] }.sort]
+    end).sort
   end
 end

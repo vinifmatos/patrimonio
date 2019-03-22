@@ -1,33 +1,50 @@
 $(document).on('turbolinks:load', function () {
-  $("select#kind").change(function () {
-    if ($(this).val() != "") {
-      $("select#sub_kind").append('<option value=""><%= I18n.t('views.depreciation.loading_text.sub_kinds') %></option>')
-      $("div#sub_kind_group").show()
-      $.get("/depreciation/get_sub_kinds", { kind: $(this).val() }).done(function (data) {
-        $("select#sub_kind").empty()
-        $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
-        $("select#sub_kind").append(data)
-      })
+  let searchParams = new URLSearchParams(window.location.search)
+  let sub_kinds = $('select#sub_kind').html();
+  let categories = $('select#category').html();
+
+  if (searchParams.get('kind') == null) {
+    $("select#kind").val('')
+    $("select#sub_kind").empty()
+    $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
+    $("select#category").empty()
+    $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
+  } else {
+    $("select#kind").val(searchParams.get('kind'))
+    var kind = $('select#kind').val();
+    var options = $(sub_kinds).filter("optgroup[label=" + kind + "]").html();
+    $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
+    $('select#sub_kind').append(options);
+    $("select#sub_kind").val(searchParams.get('sub_kind'))
+    var sub_kind = $('select#sub_kind').val();
+    var options = $(categories).filter("optgroup[label=" + sub_kind + "]").html();
+    $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
+    $('select#category').append(options);
+    $("select#category").val(searchParams.get('category'))
+  }
+
+  $('select#kind').change(function () {
+    var kind = $('select#kind').val();
+    if (kind != '') {
+      var options = $(sub_kinds).filter("optgroup[label=" + kind + "]").html();
+      $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
+      $('select#sub_kind').append(options);
     } else {
       $("select#sub_kind").empty()
       $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
+      $("select#category").empty()
+      $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
     }
-  })
-});
-
-$(document).on('turbolinks:load', function () {
-  $("select#sub_kind").change(function () {
-    if ($(this).val() != "") {
-      $("select#sub_sub_kind").append('<option value=""><%= I18n.t('views.depreciation.loading_text.categories') %></option>')
-      $("div#sub_kind_group").show()
-      $.get("/depreciation/get_categories", { sub_kind: $(this).val() }).done(function (data) {
-        $("select#category").empty()
-        $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
-        $("select#category").append(data)
-      })
+  });
+  $('select#sub_kind').change(function () {
+    var sub_kind = $('select#sub_kind').val();
+    if (sub_kind != '') {
+      var options = $(categories).filter("optgroup[label=" + sub_kind + "]").html();
+      $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
+      $('select#category').append(options);
     } else {
       $("select#category").empty()
       $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
     }
-  })
+  });
 });

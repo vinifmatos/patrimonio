@@ -18,14 +18,14 @@
         </div>
         <div id="sub_kind_group" class="form-group">
           <%= label_tag :sub_kind, t('activerecord.models.good_sub_kind.one') %>
-          <%= select_tag :sub_kind, nil, prompt: t('views.all.male'), class: 'form-control' %>
+          <%= select_tag :sub_kind, grouped_options_for_select(@sub_kinds), prompt: t('views.all.male'), class: 'form-control' %>
         </div>
         <div id="category_group" class="form-group">
           <%= label_tag :category, t('activerecord.models.good_category.one') %>
-          <%= select_tag :category, nil, prompt: t('views.all.female'), class: 'form-control' %>
+          <%= select_tag :category, grouped_options_for_select(@categories), prompt: t('views.all.female'), class: 'form-control' %>
         </div>
         <div class="actions">
-          <%= submit_tag t('views.depreciation.actions.depreciate'), class: 'btn btn-primary' %>
+          <%= submit_tag t('views.depreciation.actions.filter'), class: 'btn btn-primary' %>
         </div>
       <% end %>
       <table id="depreciable_goods" class="table table-bordered table-hover mt-4">
@@ -57,17 +57,3 @@
     </div>
   </div>
 </div>
-<script>
-  function subKindOptions() {
-    let options = ""
-    return options
-  }
-  function categoryOptions() {
-    let categories = "<%= @categories %>"
-    var html = ''
-    categories[$("select#sub_kind").val()].forEach(e => {
-      '<option value=' + e[1] + '>' + e[0] + '</option>'
-    });
-    return options
-  }
-</script>
