@@ -1,11 +1,12 @@
 pt-BR:
   views:
-    depreciation:
+    depreciations:
       title: Depreciação
       actions:
         depreciate: Depreciar
         select: Selecionar
         filter: Filtrar
+        apply: Aplicar
       form:
         fields:
           movement_date: Data

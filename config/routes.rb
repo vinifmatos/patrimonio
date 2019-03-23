@@ -2,8 +2,8 @@
 
 Rails.application.routes.draw do
   root 'home#index'
-  get 'depreciation/', to: 'depreciation#index', as: 'depreciation'
   get 'goods/:id/departments', to: 'goods#departments', as: 'good_departments', constraints: { format: :js }
+  resources :depreciations, only: %i[index create]
   resources :departments
   resources :properties
   resources :good_categories

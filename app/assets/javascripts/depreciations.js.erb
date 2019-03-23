@@ -65,13 +65,23 @@ $(document).on('turbolinks:load', function () {
   });
 });
 
-
 $(document).on('turbolinks:load', function () {
   $('div#filters').on('shown.bs.collapse', function () {
-    $('button#btn_toggle_filters').text('<%= I18n.t('views.depreciation.filters.hide') %>')
+    $('button#btn_toggle_filters').text('<%= I18n.t('views.depreciations.filters.hide') %>')
   });
 
   $('div#filters').on('hidden.bs.collapse', function () {
-    $('button#btn_toggle_filters').text('<%= I18n.t('views.depreciation.filters.show') %>')
+    $('button#btn_toggle_filters').text('<%= I18n.t('views.depreciations.filters.show') %>')
   });
+});
+
+$(document).on('turbolinks:load', function () {
+  let searchParams = new URLSearchParams(window.location.search)
+
+  $('form#depreciation_form').submit(function () {
+    $('input#kind_id').val(searchParams.get('kind') == null ? '' : searchParams.get('kind'))
+    $('input#sub_kind_id').val(searchParams.get('sub_kind') == null ? '' : searchParams.get('sub_kind'))
+    $('input#category_id').val(searchParams.get('category') == null ? '' : searchParams.get('category'))
+    $('input#goods_ids').val(searchParams.get('goods') == null ? '' : searchParams.get('goods'))
+  })
 });

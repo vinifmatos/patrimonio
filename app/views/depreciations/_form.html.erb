@@ -1,0 +1,9 @@
+<%= form_tag depreciations_path, id: 'depreciation_form', class: 'form-inline mb-3' do |f| %>
+  <%= label_tag :movement_date, t('views.depreciations.form.fields.movement_date'), class: 'my-1 mr-2' %>
+  <%= datepicker_field(:movement_date) %>
+  <%= hidden_field_tag :kind, nil, id: :kind_id %>
+  <%= hidden_field_tag :sub_kind, nil, id: :sub_kind_id %>
+  <%= hidden_field_tag :category, nil, id: :category_id %>
+  <%= hidden_field_tag :goods, nil, id: :goods_ids %>
+  <%= submit_tag t('views.depreciations.actions.depreciate'), class: 'btn btn-primary ml-2' %>
+<% end %>

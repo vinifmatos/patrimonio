@@ -1,18 +1,14 @@
 <div class="container">
   <div class="card mt-3">
     <div class="card-header">
-      <h1><%= t 'views.depreciation.title' %></h1>
+      <h1><%= t 'views.depreciations.title' %></h1>
     </div>
     <div class="card-body">
-      <%= form_tag depreciation_path, class: 'form-inline mb-3' do |f| %>
-        <%= label_tag :movement_date, t('views.depreciation.form.fields.movement_date'), class: 'my-1 mr-2' %>
-        <%= datepicker_field(:movement_date) %>
-        <%= submit_tag t('views.depreciation.actions.depreciate'), class: 'btn btn-primary ml-2' %>
-      <% end %>
-      <%= button_tag t('views.depreciation.filters.show'), id: 'btn_toggle_filters' ,data: { toggle: 'collapse', target: 'div#filters' }, aria: { expanded: 'false', controls: 'filters'}, class: 'btn btn-primary' %>
+      <%= render 'depreciations/form' %>
+      <%= button_tag t('views.depreciations.filters.show'), id: 'btn_toggle_filters' ,data: { toggle: 'collapse', target: 'div#filters' }, aria: { expanded: 'false', controls: 'filters'}, class: 'btn btn-primary' %>
       <div class="collapse" id="filters">
         <div class="card card-body">
-          <%= render 'depreciation/filters_form', kinds: @kinds, sub_kinds: @sub_kinds, categories: @categories %>
+          <%= render 'depreciations/filters_form', kinds: @kinds, sub_kinds: @sub_kinds, categories: @categories %>
         </div>
       </div>
       <table id="depreciable_goods" class="table table-bordered table-hover mt-4">

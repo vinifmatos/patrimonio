@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DepreciationController < ApplicationController
+class DepreciationsController < ApplicationController
   def index
     if params[:kind].blank?
       @goods = params[:goods].blank? ? Good.active.order(:code) : Good.active.where(id: params[:goods].split(',')).order(:code)
@@ -21,5 +21,9 @@ class DepreciationController < ApplicationController
     @categories = (GoodSubKind.all.includes(:categories).map do |sk|
       [sk.id, sk.categories.map { |c| [c.description, c.id] }.sort]
     end).sort
+  end
+
+  def create
+    redirect_to depreciations_path
   end
 end

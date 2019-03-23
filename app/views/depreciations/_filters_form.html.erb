@@ -1,6 +1,4 @@
-<%= form_tag depreciation_path, method: :get do |f| %>
-  <div class="row no-gutters">
-  </div>
+<%= form_tag depreciations_path, method: :get do |f| %>
   <div class="form-group">
     <%= label_tag :kind, t('activerecord.models.good_kind.one') %>
     <%= select_tag :kind, options_for_select(kinds), selected: params[:kind], prompt: t('views.all.male'), class: 'form-control' %>
@@ -18,6 +16,6 @@
     <%= text_field_tag :goods, nil, class: 'form-control wd-2' %>
   </div>
   <div class="actions">
-    <%= submit_tag t('views.depreciation.actions.filter'), class: 'btn btn-primary' %>
+    <%= submit_tag t('views.depreciations.actions.apply'), class: 'btn btn-primary' %>
   </div>
 <% end %>
