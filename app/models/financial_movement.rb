@@ -77,7 +77,6 @@ class FinancialMovement < ApplicationRecord
     if good.present? && amount.present?
       depreciable_amount =
         good.depreciable_amount - good.depreciated_amount
-      p depreciable_amount
       if amount.abs > depreciable_amount
         errors.add(:amount,
                    :greater_than_depreciable_amount,

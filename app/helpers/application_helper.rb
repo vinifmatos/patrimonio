@@ -8,7 +8,7 @@ module ApplicationHelper
   def form_datepicker_field(form, field, options = {}, &block)
     content_tag(:div, class: 'input-group date-input-group') do
       content = form.text_field(field,
-                                value: (I18n.l(eval("form.object.#{field}")) if eval("form.object.#{field}.present?")),
+                                value: ((I18n.l(eval("form.object.#{field}")) if eval("form.object.#{field}.present?")) if form.object.present?),
                                 class: "form-control datepicker-input #{options[:class]}", required: (options[:required] || false))
       content += content_tag(:div, class: 'input-group-append') do
         button_tag(fa_icon('calendar'),

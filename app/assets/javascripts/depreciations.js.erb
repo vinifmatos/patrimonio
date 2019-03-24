@@ -1,40 +1,36 @@
 $(document).on('turbolinks:load', function () {
-  let searchParams = new URLSearchParams(window.location.search)
   let sub_kinds = $('select#sub_kind').html();
   let categories = $('select#category').html();
 
-  if (searchParams.get('kind') == null) {
+  let kind_val = $("input#filters_kind_id").val()
+  let sub_kind_val = $("input#filters_sub_kind_id").val()
+  let category_val = $("input#filters_category_id").val()
+
+  if (kind_val == '') {
     $("select#kind").val('')
     $("select#sub_kind").empty()
     $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
     $("select#category").empty()
     $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
   } else {
-    $("select#kind").val(searchParams.get('kind'))
-    var kind = $('select#kind').val();
-    if (kind != '') {
-      var options = $(sub_kinds).filter("optgroup[label=" + kind + "]").html();
+    if (kind_val != '') {
+      $("select#kind").val(kind_val)
+      var options = $(sub_kinds).filter("optgroup[label=" + kind_val + "]").html();
       $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
       $('select#sub_kind').append(options);
-      $("select#sub_kind").val(searchParams.get('sub_kind'))
+      $("select#sub_kind").val(sub_kind_val)
     } else {
       $("select#sub_kind").html('<option value=""><%= I18n.t('views.all.male') %></option>')
     }
-    var sub_kind = $('select#sub_kind').val();
-    if (sub_kind != '') {
-      var options = $(categories).filter("optgroup[label=" + sub_kind + "]").html();
+
+    if (sub_kind_val != '') {
+      var options = $(categories).filter("optgroup[label=" + sub_kind_val + "]").html();
       $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
       $('select#category').append(options);
-      $("select#category").val(searchParams.get('category'))
+      $("select#category").val(category_val)
     } else {
       $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
     }
-  }
-
-  if (searchParams.get('goods') == null) {
-    $("select#goods").val('')
-  } else {
-    $("input#goods").val(searchParams.get('goods'))
   }
 
   $('select#kind').change(function () {
@@ -52,6 +48,7 @@ $(document).on('turbolinks:load', function () {
       $("select#category").html('<option value=""><%= I18n.t('views.all.female') %></option>')
     }
   });
+
   $('select#sub_kind').change(function () {
     var sub_kind = $('select#sub_kind').val();
     if (sub_kind != '') {
@@ -76,12 +73,18 @@ $(document).on('turbolinks:load', function () {
 });
 
 $(document).on('turbolinks:load', function () {
-  let searchParams = new URLSearchParams(window.location.search)
-
   $('form#depreciation_form').submit(function () {
-    $('input#kind_id').val(searchParams.get('kind') == null ? '' : searchParams.get('kind'))
-    $('input#sub_kind_id').val(searchParams.get('sub_kind') == null ? '' : searchParams.get('sub_kind'))
-    $('input#category_id').val(searchParams.get('category') == null ? '' : searchParams.get('category'))
-    $('input#goods_ids').val(searchParams.get('goods') == null ? '' : searchParams.get('goods'))
+    $('input#depreciation_filters_kind_id').val($("select#kind").val())
+    $('input#depreciation_filters_sub_kind_id').val($("select#sub_kind").val())
+    $('input#depreciation_filters_category_id').val($("select#category").val())
+    $('input#depreciation_filters_goods').val($("input#filters_goods").val())
+  })
+});
+
+$(document).on('turbolinks:load', function () {
+  $('form#filters_form').submit(function () {
+    $('input#filters_kind_id').val($("select#kind").val())
+    $('input#filters_sub_kind_id').val($("select#sub_kind").val())
+    $('input#filters_category_id').val($("select#category").val())
   })
 });

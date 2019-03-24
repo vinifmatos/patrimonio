@@ -23,8 +23,6 @@ module Depreciation
     end
 
     def depreciate
-      return if @movement_date.day < @good.base_date.day
-
       if @good.depreciation_method == METHODS[:constant_quotas]
         constant_quotas
       elsif @good.depreciation_method == METHODS[:digits_sum]

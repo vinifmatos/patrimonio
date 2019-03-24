@@ -1,42 +1,18 @@
 <div class="container">
+  <% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+      <%= flash[:notice] %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
   <div class="card mt-3">
     <div class="card-header">
       <h1><%= t 'views.depreciations.title' %></h1>
     </div>
     <div class="card-body">
-      <%= render 'depreciations/form' %>
-      <%= button_tag t('views.depreciations.filters.show'), id: 'btn_toggle_filters' ,data: { toggle: 'collapse', target: 'div#filters' }, aria: { expanded: 'false', controls: 'filters'}, class: 'btn btn-primary' %>
-      <div class="collapse" id="filters">
-        <div class="card card-body">
-          <%= render 'depreciations/filters_form', kinds: @kinds, sub_kinds: @sub_kinds, categories: @categories %>
-        </div>
-      </div>
-      <table id="depreciable_goods" class="table table-bordered table-hover mt-4">
-        <thead>
-          <tr>
-            <th><%= @goods.human_attribute_name(:code) %></th>
-            <th><%= @goods.human_attribute_name(:description) %></th>
-            <th><%= @goods.human_attribute_name(:base_date) %></th>
-            <th><%= @goods.human_attribute_name(:last_depreciation) %></th>
-            <th><%= @goods.human_attribute_name(:purchase_price) %></th>
-            <th><%= @goods.human_attribute_name(:depreciated_amount) %></th>
-            <th><%= @goods.human_attribute_name(:net_amount) %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @goods.each do |good| %>
-            <tr>
-              <td><%= good.code %></td>
-              <td><%= link_to good.description, good %></td>
-              <td><%= l(good.base_date) %></td>
-              <td><%= ldate(good.last_depreciation) %></td>
-              <td><%= number_with_precision(good.purchase_price, precision: 2) %></td>
-              <td><%= number_with_precision(good.depreciated_amount, precision: 2) %></td>
-              <td><%= number_with_precision(good.net_amount, precision: 2) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= link_to t('views.depreciations.actions.new'), new_depreciation_path, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>

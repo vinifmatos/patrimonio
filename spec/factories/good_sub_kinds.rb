@@ -6,8 +6,8 @@ FactoryBot.define do
     active { [true, false].sample }
     kind { FactoryBot.create(:good_kind) }
     lifespan { rand(24..120) }
-    residual_amount_rate { rand(1..10.0).round(2) }
+    residual_amount_rate { rand(0.1..0.10).round(4) }
     yearly_depreciation_rate { rand(0.1..0.2).round(4) }
-    depreciation_method { Depreciation::METHODS[Depreciation::METHODS.keys.sample] }
+    depreciation_method { Depreciation::METHODS[:constant_quotas] }
   end
 end

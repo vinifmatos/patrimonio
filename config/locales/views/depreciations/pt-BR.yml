@@ -1,12 +1,13 @@
 pt-BR:
   views:
     depreciations:
-      title: Depreciação
+      title: Depreciações
       actions:
         depreciate: Depreciar
         select: Selecionar
         filter: Filtrar
         apply: Aplicar
+        new: Nova Depreciação
       form:
         fields:
           movement_date: Data
@@ -16,3 +17,6 @@ pt-BR:
       filters:
         show: Filtros
         hide: Ocultar Filtros
+      blank_filters: Nenhum filtro aplicado!
+      blank_date: A data da depreciação não pode ficar em branco!
+      processing: A depreciação está sendo processada.

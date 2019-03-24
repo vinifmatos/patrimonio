@@ -1,9 +1,11 @@
-<%= form_tag depreciations_path, id: 'depreciation_form', class: 'form-inline mb-3' do |f| %>
-  <%= label_tag :movement_date, t('views.depreciations.form.fields.movement_date'), class: 'my-1 mr-2' %>
-  <%= datepicker_field(:movement_date) %>
-  <%= hidden_field_tag :kind, nil, id: :kind_id %>
-  <%= hidden_field_tag :sub_kind, nil, id: :sub_kind_id %>
-  <%= hidden_field_tag :category, nil, id: :category_id %>
-  <%= hidden_field_tag :goods, nil, id: :goods_ids %>
-  <%= submit_tag t('views.depreciations.actions.depreciate'), class: 'btn btn-primary ml-2' %>
+<%= form_for :depreciation, url: depreciations_path, html: { id: 'depreciation_form', class: 'form-inline mb-3' } do |form| %>
+  <%= form.label :movement_date, t('views.depreciations.form.fields.movement_date'), class: 'my-1 mr-2' %>
+  <%= form_datepicker_field(form, :movement_date) %>
+  <%= form.fields_for :filters do |filter| %>
+    <%= filter.hidden_field :kind_id %>
+    <%= filter.hidden_field :sub_kind_id %>
+    <%= filter.hidden_field :category_id %>
+    <%= filter.hidden_field :goods %>
+  <% end %>
+  <%= form.submit t('views.depreciations.actions.depreciate'), class: 'btn btn-primary ml-2' %>
 <% end %>
