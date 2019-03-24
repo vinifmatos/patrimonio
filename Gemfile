@@ -50,7 +50,7 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'sidekiq'
 
-gem 'redis'
+gem 'redis-rails'
 
 gem 'activejob-status'
 

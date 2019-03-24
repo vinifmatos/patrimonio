@@ -13,6 +13,34 @@
     </div>
     <div class="card-body">
       <%= link_to t('views.depreciations.actions.new'), new_depreciation_path, class: 'btn btn-primary' %>
+      <table class="table table-bordered table-hover mt-4" id="depreciation_jobs" >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>iniciado em</th>
+            <th>Status</th>
+            <th>Progresso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3" class="text-center">Carregando jobs....</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  function updateJobs() {
+    var timer = setTimeout(updateJobs, 5000);
+    if (window.location.pathname != '/depreciations') {
+          clearInterval(timer)
+          return
+        }
+    $.get('/depreciations/jobs')
+  }
+  $(document).on('turbolinks:load', function () {
+    updateJobs();
+  });
+</script>

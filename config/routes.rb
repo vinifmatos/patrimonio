@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
   get 'goods/:id/departments', to: 'goods#departments', as: 'good_departments', constraints: { format: :js }
+  get 'depreciations/jobs', to: 'depreciations#get_depreciation_jobs', as: 'depreciations_jobs', constraints: { format: :js }
   resources :depreciations, except: %i[edit update destroy]
   resources :departments
   resources :properties

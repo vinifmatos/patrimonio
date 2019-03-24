@@ -55,9 +55,17 @@ class DepreciationsController < ApplicationController
         return
       end
     end
-
-    DepreciationJob.perform_later(@goods_ids, @depreciation_params[:movement_date])
+    DepreciationJob.perform_later(@goods_ids, @depreciation_params[:movement_date], current_user.id)
     redirect_to depreciations_path, notice: t('views.depreciations.processing')
+  end
+
+  def get_depreciation_jobs
+    @jobs = Job.where(user: current_user, kind: :depreciation).order(:started_at).map do |job|
+      status = ActiveJob::Status.get(job.job_id)
+      { started_at: I18n.l(job.started_at, format: :short),
+        progress: (status.progress > 0 ? status.progress : 0),
+        status: status.status }
+    end
   end
 
   private
