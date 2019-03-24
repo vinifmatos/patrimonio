@@ -1,0 +1,9 @@
+pt-BR:
+  views:
+    users:
+      change_password:
+        title: Alterar Senha
+      actions:
+        change_password: Alterar senha
+        logout: Sair
+        login: Entrar

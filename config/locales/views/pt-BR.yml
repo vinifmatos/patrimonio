@@ -6,6 +6,7 @@ pt-BR:
       new: Novo
       back: Voltar
       destroy: Excluir
+      cancel: Cancelar
     confirm: Você tem certeza?
     active:
       true: Sim

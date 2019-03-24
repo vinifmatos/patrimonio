@@ -17,4 +17,9 @@ Rails.application.routes.draw do
     resources :financial_movements, only: :create
   end
   mount Sidekiq::Web => '/sidekiq'
+  resource :user, only: [:edit] do
+    collection do
+      patch :update_password
+    end
+  end
 end
