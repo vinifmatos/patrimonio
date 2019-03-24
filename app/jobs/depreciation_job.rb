@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DepreciationJob < ApplicationJob
+  include ActiveJob::Status
+
   queue_as :default
 
   def perform(goods_ids, depreciation_date)

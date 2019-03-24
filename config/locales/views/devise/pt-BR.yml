@@ -1,0 +1,5 @@
+pt-BR:
+  activerecord:
+    attributes:
+      user:
+        login: "Usuário ou email"
