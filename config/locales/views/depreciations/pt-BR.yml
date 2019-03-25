@@ -8,6 +8,7 @@ pt-BR:
         filter: Filtrar
         apply: Aplicar
         new: Nova Depreciação
+        depreciate_all: Depreciar todos os patrimônios?
       form:
         fields:
           movement_date: Data

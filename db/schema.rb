@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_24_162751) do
+ActiveRecord::Schema.define(version: 2019_03_24_143209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,18 +104,6 @@ ActiveRecord::Schema.define(version: 2019_03_24_162751) do
     t.index ["good_situation_id"], name: "index_goods_on_good_situation_id"
   end
 
-  create_table "jobs", force: :cascade do |t|
-    t.string "job_id"
-    t.bigint "user_id"
-    t.datetime "started_at"
-    t.datetime "finished_at"
-    t.integer "kind"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_jobs_on_job_id"
-    t.index ["user_id"], name: "index_jobs_on_user_id"
-  end
-
   create_table "movement_kinds", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
@@ -165,7 +153,6 @@ ActiveRecord::Schema.define(version: 2019_03_24_162751) do
   add_foreign_key "goods", "departments"
   add_foreign_key "goods", "good_categories"
   add_foreign_key "goods", "good_situations"
-  add_foreign_key "jobs", "users"
   add_foreign_key "movements", "departments"
   add_foreign_key "movements", "goods"
   add_foreign_key "movements", "movement_kinds"

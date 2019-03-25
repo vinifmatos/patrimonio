@@ -30,12 +30,10 @@ class DepreciationsController < ApplicationController
 
     if @filters_params[:kind_id].blank?
       if @filters_params[:goods].blank?
-        flash[:alert] = t('views.depreciations.blank_filters')
-        render :new
-        return
+        @goods_ids = Good.active.pluck(:id)
+      else
+         @goods_ids = @filters_params[:goods].split(',')
       end
-
-      @goods_ids = @filters_params[:goods].split(',')
     else
       sub_kinds = @filters_params[:sub_kind_id].blank? ? GoodSubKind.where(good_kind_id: @filters_params[:kind_id]).pluck(:id) : @filters_params[:sub_kind_id]
       categories = @filters_params[:category_id].blank? ? GoodCategory.where(good_sub_kind_id: sub_kinds).pluck(:id) : @filters_params[:category_id]

@@ -75,6 +75,11 @@ $(document).on('turbolinks:load', function () {
 $(document).on('turbolinks:load', function () {
   $('form#depreciation_form').submit(function () {
     $('input#depreciation_filters_kind_id').val($("select#kind").val())
+    if ($('input#depreciation_filters_kind_id').val() == '') {
+      if (!confirm('<%= I18n.t('views.depreciations.actions.depreciate_all') %>')) {
+        return false
+      }
+    }
     $('input#depreciation_filters_sub_kind_id').val($("select#sub_kind").val())
     $('input#depreciation_filters_category_id').val($("select#category").val())
     $('input#depreciation_filters_goods').val($("input#filters_goods").val())

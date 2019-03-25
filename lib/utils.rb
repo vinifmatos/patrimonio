@@ -37,6 +37,7 @@ module Utils
 
     def self.get_hash(key)
       json = Redis.connection.get(key)
+      json = '{"jobs": []}' if json.nil?
       JSON.parse(json)
     end
 
