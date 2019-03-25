@@ -20,3 +20,14 @@ pt-BR:
       blank_filters: Nenhum filtro aplicado!
       blank_date: A data da depreciação não pode ficar em branco!
       processing: A depreciação está sendo processada.
+      jobs:
+        empty: Nenhuma depreciação em andamento no momento.
+        table:
+          headers:
+            status: Estado
+            progress: Progresso
+        status:
+          completed: Completo
+          queued: Na fila
+          working: Em execução
+          failed: Falhou

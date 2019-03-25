@@ -17,14 +17,19 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>iniciado em</th>
-            <th>Status</th>
-            <th>Progresso</th>
+            <th><%= t('views.depreciations.jobs.table.headers.status') %></th>
+            <th><%= t('views.depreciations.jobs.table.headers.progress') %></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td colspan="3" class="text-center">Carregando jobs....</td>
+            <td colspan="3" class="text-center">
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

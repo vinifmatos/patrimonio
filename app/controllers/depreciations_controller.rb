@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class DepreciationsController < ApplicationController
-  # before_action :set_goods, only: %i[new create]
   before_action :set_kinds, only: %i[new create]
   before_action :set_sub_kinds, only: %i[new create]
   before_action :set_categories, only: %i[new create]
@@ -55,17 +54,13 @@ class DepreciationsController < ApplicationController
         return
       end
     end
-    DepreciationJob.perform_later(@goods_ids, @depreciation_params[:movement_date], current_user.id)
+    job = DepreciationJob.perform_later(@goods_ids, @depreciation_params[:movement_date])
+    Utils::UserJobs.set(current_user, job)
     redirect_to depreciations_path, notice: t('views.depreciations.processing')
   end
 
   def get_depreciation_jobs
-    @jobs = Job.where(user: current_user, kind: :depreciation).order(:started_at).map do |job|
-      status = ActiveJob::Status.get(job.job_id)
-      { started_at: I18n.l(job.started_at, format: :short),
-        progress: (status.progress > 0 ? status.progress : 0),
-        status: status.status }
-    end
+    @jobs = Utils::UserJobs.get(current_user)
   end
 
   private

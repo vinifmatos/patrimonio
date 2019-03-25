@@ -1,14 +1,19 @@
-<% count = 1 %>
-<% jobs.each do | job | %>
+<% if jobs.count.positive? %>
+  <% count = 1 %>
+  <% jobs.each do | job | %>
+    <tr>
+      <td><%= count %></td>
+      <td><%= t("views.depreciations.jobs.status.#{job[:status]}") %></td>
+      <td>
+        <div class="progress mt-1">
+          <div class="progress-bar" style= "width: <%= "#{job[:progress]}%" %>" role="progressbar" aria-valuenow="<%= job[:progress] %>" aria-valuemin="0" aria-valuemax="100"><%= "#{job[:progress]}%" %></div>
+        </div>
+      </td>
+    </tr>
+    <% count += 1 %>
+  <% end %>
+<% else %>
   <tr>
-    <td><%= count %></td>
-    <td><%= job[:started_at] %></td>
-    <td><%= job[:status] %></td>
-    <td>
-      <div class="progress">
-        <div class="progress-bar" style= "width: <%= "#{job[:progress] * 100}%" %>" role="progressbar" aria-valuenow="<%= job[:progress] %>" aria-valuemin="0" aria-valuemax="1"><%= "#{job[:progress] * 100}%" %></div>
-      </div>
-    </td>
+    <td colspan="4" class="text-center"><%= t('views.depreciations.jobs.empty') %></td>
   </tr>
-  <% count += 1 %>
 <% end %>

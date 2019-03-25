@@ -51,6 +51,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'sidekiq'
 
 gem 'redis-rails'
+gem 'redis-namespace'
 
 gem 'activejob-status'
 
