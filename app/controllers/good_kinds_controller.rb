@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 class GoodKindsController < ApplicationController
-  before_action :set_good_kind, only: [:show, :edit, :update, :destroy]
+  before_action :set_good_kind, only: %i[show edit update destroy]
 
   # GET /good_kinds
   # GET /good_kinds.json
   def index
-    @good_kinds = GoodKind.all
+    @good_kinds = GoodKind.all.order(:description).page(params[:page])
   end
 
   # GET /good_kinds/1
   # GET /good_kinds/1.json
-  def show
-  end
+  def show; end
 
   # GET /good_kinds/new
   def new
@@ -18,8 +19,7 @@ class GoodKindsController < ApplicationController
   end
 
   # GET /good_kinds/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /good_kinds
   # POST /good_kinds.json
@@ -62,13 +62,14 @@ class GoodKindsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_good_kind
-      @good_kind = GoodKind.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def good_kind_params
-      params.require(:good_kind).permit(:description, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_good_kind
+    @good_kind = GoodKind.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def good_kind_params
+    params.require(:good_kind).permit(:description, :active)
+  end
 end

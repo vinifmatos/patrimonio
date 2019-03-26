@@ -9,7 +9,7 @@ class GoodsController < ApplicationController
   # GET /goods
   # GET /goods.json
   def index
-    @goods = Good.all.includes(:category, :department, :situation)
+    @goods = Good.all.includes(:category, :department, :situation).order(:code).page(params[:page])
   end
 
   # GET /goods/1

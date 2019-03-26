@@ -7,7 +7,7 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
-    @departments = Department.all.includes(:property)
+    @departments = Department.all.includes(:property).order(:description).page(params[:page])
   end
 
   # GET /departments/1

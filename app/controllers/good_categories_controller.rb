@@ -7,7 +7,7 @@ class GoodCategoriesController < ApplicationController
   # GET /good_categories
   # GET /good_categories.json
   def index
-    @good_categories = GoodCategory.all.includes(:sub_kind)
+    @good_categories = GoodCategory.all.includes(:sub_kind).order(:description).page(params[:page])
   end
 
   # GET /good_categories/1
