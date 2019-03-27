@@ -48,14 +48,26 @@ select {
   max-width: fit-content;
 }
 
-.wd-1 {
+.wd-100 {
+  width: 100px;
+}
+
+.wd-150 {
   width: 150px;
 }
 
-.wd-2 {
+.wd-200 {
   width: 200px;
 }
 
-.wd-3 {
+.wd-250 {
   width: 250px;
+}
+
+.wd-300 {
+  width: 300px;
+}
+
+.wd-350 {
+  width: 350px;
 }

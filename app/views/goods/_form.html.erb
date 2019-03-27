@@ -11,7 +11,7 @@
   <% end %>
   <div class="form-group">
     <%= form.label :code %>
-    <%= form.text_field :code, class: 'form-control' %>
+    <%= form.text_field :code, class: 'form-control wd-100' %>
   </div>
   <div class="form-group">
     <%= form.label :description %>
@@ -27,7 +27,7 @@
   </div>
   <div class="form-group">
     <%= form.label :purchase_price %>
-    <%= form.number_field :purchase_price, min: 0.01, step: 0.01, value: (number_with_precision(form.object.purchase_price, precision: 2) if form.object.purchase_price), class: 'form-control' %>
+    <%= form.number_field :purchase_price, min: 0.01, step: 0.01, value: (number_with_precision(form.object.purchase_price, precision: 2) if form.object.purchase_price), class: 'form-control wd-150' %>
   </div>
   <div class="form-group">
     <%= form.label :purchase_date %>

@@ -1,38 +1,34 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
-  <div class="row">
+  <div class="row no-gutters">
     <h1><%= @goods.model_name.human(count: 2) %></h1>
-    <div class="ml-auto mt-2">
-      <%= link_to t('views.goods.new.title'), new_good_path, class: 'btn btn-success' %>
-    </div>
   </div>
-  <div class="row">
-    <table class="table table-bordered table-hover">
-      <thead>
+  <div class="row no-gutters">
+    <%= link_to t('views.goods.new.title'), new_good_path, class: 'btn btn-primary' %>
+  </div>
+  <table class="table table-bordered table-hover mt-3">
+    <thead>
+      <tr>
+        <th><%= @goods.human_attribute_name(:code) %></th>
+        <th><%= @goods.human_attribute_name(:description) %></th>
+        <th><%= @goods.human_attribute_name(:purchase_date) %></th>
+        <th><%= @goods.human_attribute_name(:purchase_price) %></th>
+        <th><%= @goods.human_attribute_name(:net_amount) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @goods.each do |good| %>
         <tr>
-          <th><%= @goods.human_attribute_name(:code) %></th>
-          <th><%= @goods.human_attribute_name(:description) %></th>
-          <th><%= @goods.human_attribute_name(:purchase_price) %></th>
-          <th><%= @goods.human_attribute_name(:purchase_date) %></th>
-          <th><%= @goods.human_attribute_name(:good_category_id) %></th>
-          <th><%= @goods.human_attribute_name(:department_id) %></th>
+          <td><%= good.code %></td>
+          <td><%= link_to good.description, good %></td>
+          <td><%= l(good.purchase_date) %></td>
+          <td><%= number_with_precision(good.purchase_price, precision: 2) %></td>
+          <td><%= number_with_precision(good.net_amount, precision: 2)%></td>
         </tr>
-      </thead>
-      <tbody>
-        <% @goods.each do |good| %>
-          <tr>
-            <td><%= good.code %></td>
-            <td><%= link_to good.description, good %></td>
-            <td><%= number_with_precision(good.purchase_price, precision: 2) %></td>
-            <td><%= l(good.purchase_date) %></td>
-            <td><%= good.category.description %></td>
-            <td><%= good.department.description %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-center" style="width: 100%;">
-      <%= paginate @goods, theme: 'twitter-bootstrap-4' %>
-    </div>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center" style="width: 100%;">
+    <%= paginate @goods, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>

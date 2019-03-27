@@ -2,9 +2,9 @@
 
 class GoodsController < ApplicationController
   before_action :set_good, only: %i[edit update destroy departments]
-  before_action :set_categories, only: %i[new edit]
-  before_action :set_departments, only: %i[new edit]
-  before_action :set_situations, only: %i[new edit]
+  before_action :set_categories, only: %i[new edit create update]
+  before_action :set_departments, only: %i[new edit create update]
+  before_action :set_situations, only: %i[new edit create update]
 
   # GET /goods
   # GET /goods.json

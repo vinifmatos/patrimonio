@@ -2,3 +2,13 @@
   padding-top: 15px;
   margin-bottom: 15px;
 }
+
+.container.form {
+  @media (min-width: 768px) {
+    max-width: 70%;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 50%;
+  }
+}
