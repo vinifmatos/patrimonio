@@ -2,6 +2,8 @@
 
 class GoodsController < ApplicationController
   before_action :set_good, only: %i[edit update destroy departments]
+  before_action :set_kinds, only: %i[new edit create update]
+  before_action :set_sub_kinds, only: %i[new edit create update]
   before_action :set_categories, only: %i[new edit create update]
   before_action :set_departments, only: %i[new edit create update]
   before_action :set_situations, only: %i[new edit create update]
@@ -102,7 +104,7 @@ class GoodsController < ApplicationController
   end
 
   def set_categories
-    @categories = GoodCategory.all.map { |c| [c.description, c.id] }
+    @categories = GoodSubKind.active.select(:id).map { |sk| sk.categories.active.map { |c| [sk.id, [c.description, c.id]] } }
   end
 
   def set_departments
@@ -117,5 +119,15 @@ class GoodsController < ApplicationController
     @departments = (Property.includes(:departments).where.not(departments: { id: @good.movements.last.department_id }).map do |p|
       [p.description, p.departments.map { |d| [d.description, d.id] }.sort]
     end).sort
+  end
+
+  def set_kinds
+    @kinds = GoodKind.active.select(:id, :description).map { |k| [k.description, k.id] }
+  end
+
+  def set_sub_kinds
+    @sub_kinds = GoodKind.active.map do |k|
+      [k.id, [k.sub_kinds.active.select(:id, :description).map { |sk| [sk.description, sk.id] }]]
+    end
   end
 end
