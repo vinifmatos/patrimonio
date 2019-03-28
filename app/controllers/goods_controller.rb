@@ -104,7 +104,7 @@ class GoodsController < ApplicationController
   end
 
   def set_categories
-    @categories = GoodSubKind.active.select(:id).map { |sk| sk.categories.active.map { |c| [sk.id, [c.description, c.id]] } }
+    @categories = GoodSubKind.active.select(:id).map { |sk| [sk.id, sk.categories.active.map { |c| [c.description, c.id] }] }
   end
 
   def set_departments
@@ -127,7 +127,7 @@ class GoodsController < ApplicationController
 
   def set_sub_kinds
     @sub_kinds = GoodKind.active.map do |k|
-      [k.id, [k.sub_kinds.active.select(:id, :description).map { |sk| [sk.description, sk.id] }]]
+      [k.id, k.sub_kinds.active.select(:id, :description).map { |sk| [sk.description, sk.id] }]
     end
   end
 end

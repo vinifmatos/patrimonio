@@ -1,0 +1,74 @@
+$(document).on('turbolinks:load', function () {
+  let kind = $("select#kind_id")
+  let sub_kind = $("select#sub_kind_id")
+  let category = $("select#category_id")
+
+  let kinds = kind.html()
+  let sub_kinds = sub_kind.html()
+  let categories = category.html()
+
+  let category_val = $("input#good_good_category_id").val()
+
+  function clearAll() {
+    kind.empty()
+    kind.html('<option value="">Selecione</option>')
+    kind.append(kinds)
+    kind.val('')
+    sub_kind.empty()
+    sub_kind.html('<option value="">Selecione o Tipo</option>')
+    category.empty()
+    category.html('<option value="">Selecione o Tipo</option>')
+  }
+
+  function setSubKinds(kind_id) {
+    sub_kind.empty()
+    sub_kind.html('<option value="">Selecione</option>')
+    var options = $(sub_kinds).filter("optgroup[label=" + kind_id + "]").html()
+    sub_kind.append(options)
+  }
+
+  function setCategories(sub_kind_id) {
+    category.empty()
+    category.html('<option value="">Selecione</option>')
+    var options = $(categories).filter("optgroup[label=" + sub_kind_id + "]").html()
+    category.append(options)
+  }
+
+
+  if (category_val == '') {
+    clearAll()
+  } else {
+    var sk = $(categories).find('option[value=' + category_val + ']').closest('optgroup').attr('label')
+    var k = $(sub_kinds).find('option[value=' + sk + ']').closest('optgroup').attr('label')
+    kind.val(k)
+    setSubKinds(k)
+    sub_kind.val(sk)
+    setCategories(sk)
+    category.val(category_val)
+  }
+
+  kind.change(function () {
+    if (kind.val() == '') {
+      clearAll()
+    } else {
+      setSubKinds(kind.val())
+    }
+  })
+
+  sub_kind.change(function () {
+    if (sub_kind.val() == '') {
+      category.empty()
+      category.html('<option value="">Selecione o Sub Tipo</option>')
+    } else {
+      setCategories(sub_kind.val())
+    }
+  })
+});
+
+$(document).on('turbolinks:load', function () {
+  let category_select = $("select#category_id")
+  let category = $("input#good_good_category_id")
+  $('form#good_form').submit(function () {
+    category.val(category_select.val())
+  })
+});
