@@ -39,15 +39,15 @@
     <%= form_datepicker_field(form, :base_date) %>
   </div>
   <div class="form-group">
-    <%= label_tag :kind_id %>
+    <%= label_tag :kind_id, t('activerecord.attributes.good.kind') %>
     <%= select_tag :kind_id, options_for_select(kinds), class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= label_tag :sub_kind_id %>
+    <%= label_tag :sub_kind_id, t('activerecord.attributes.good.sub_kind') %>
     <%= select_tag :sub_kind_id, grouped_options_for_select(sub_kinds), class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= label_tag :category_id %>
+    <%= label_tag :category_id, t('activerecord.attributes.good.good_category_id') %>
     <%= select_tag :category_id, grouped_options_for_select(categories), prompt: :select_text, class: 'form-control' %>
   </div>
   <div class="form-group">

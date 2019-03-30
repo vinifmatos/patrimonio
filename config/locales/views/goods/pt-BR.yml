@@ -11,3 +11,8 @@ pt-BR:
         title: Novo Bem
       edit:
         title: Editar Bem
+      form:
+        select:
+          kind: Selecione o Tipo
+          sub_kind: Selecione o Sub Tipo
+          category: Selecione a categoria

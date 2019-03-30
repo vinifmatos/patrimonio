@@ -11,25 +11,33 @@ $(document).on('turbolinks:load', function () {
 
   function clearAll() {
     kind.empty()
-    kind.html('<option value="">Selecione</option>')
+    kind.html('<option value=""><%= I18n.t('helpers.select.prompt') %></option>')
     kind.append(kinds)
     kind.val('')
     sub_kind.empty()
-    sub_kind.html('<option value="">Selecione o Tipo</option>')
+    sub_kind.html('<option value=""><%= I18n.t('views.goods.form.select.kind') %></option>')
     category.empty()
-    category.html('<option value="">Selecione o Tipo</option>')
+    category.html('<option value=""><%= I18n.t('views.goods.form.select.kind') %></option>')
   }
 
   function setSubKinds(kind_id) {
     sub_kind.empty()
-    sub_kind.html('<option value="">Selecione</option>')
+    if (kind_id == '') {
+      sub_kind.html('<option value=""><%= I18n.t('views.goods.form.select.kind') %></option>')
+    } else {
+      sub_kind.html('<option value=""><%= I18n.t('helpers.select.prompt') %></option>')
+    }
     var options = $(sub_kinds).filter("optgroup[label=" + kind_id + "]").html()
     sub_kind.append(options)
   }
 
   function setCategories(sub_kind_id) {
     category.empty()
-    category.html('<option value="">Selecione</option>')
+    if (sub_kind_id == '') {
+      category.html('<option value=""><%= I18n.t('views.goods.form.select.sub_kind') %></option>')
+    } else {
+      category.html('<option value=""><%= I18n.t('helpers.select.prompt') %></option>')
+    }
     var options = $(categories).filter("optgroup[label=" + sub_kind_id + "]").html()
     category.append(options)
   }
@@ -59,7 +67,7 @@ $(document).on('turbolinks:load', function () {
   sub_kind.change(function () {
     if (sub_kind.val() == '') {
       category.empty()
-      category.html('<option value="">Selecione o Sub Tipo</option>')
+      category.html('<option value=""><%= I18n.t('views.goods.form.select.sub_kind') %></option>')
     } else {
       setCategories(sub_kind.val())
     }

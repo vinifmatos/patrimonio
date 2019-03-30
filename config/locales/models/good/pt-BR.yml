@@ -19,6 +19,8 @@ pt-BR:
         net_amount: Valor Líquido
         last_depreciation_date: Data da Última Depreciação
         last_depreciation: Última Depreciação
+        kind: Tipo
+        sub_kind: Sub Tipo
       good/situations:
         active: Ativo
         inactive: Inativo
