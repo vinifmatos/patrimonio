@@ -50,10 +50,18 @@
     <%= label_tag :category_id, t('activerecord.attributes.good.good_category_id') %>
     <%= select_tag :category_id, grouped_options_for_select(categories), prompt: :select_text, class: 'form-control' %>
   </div>
-  <div class="form-group">
-    <%= form.label :department_id %>
-    <%= form.select :department_id, departments, { prompt: :select_text }, class: 'form-control' %>
-  </div>
+  <% if action_name == 'new' %>
+    <div class="form-group">
+      <%= form.label :department_id %>
+      <%# form.select :department_id, departments, { prompt: :select_text }, class: 'form-control' %>
+      <div class="input-group">
+        <%= text_field_tag :department, nil, disabled: true, class: 'form-control fit-content' %>
+        <div class="input-group-append">
+          <%= button_tag t('views.actions.select'), type: :button, id: 'btn_department_select', class: 'btn btn-outline-secondary', data: { toggle: 'modal', target: '#modal_departments' } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <div class="actions">
     <%= form.submit class: 'btn btn-success' %>
     <% if action_name == 'edit' %>
@@ -63,3 +71,4 @@
     <% end %>
   </div>
 <% end %>
+<%= render 'goods/modals/departments_selection', properties: @properties %>

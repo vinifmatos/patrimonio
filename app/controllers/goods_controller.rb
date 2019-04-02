@@ -5,7 +5,7 @@ class GoodsController < ApplicationController
   before_action :set_kinds, only: %i[new edit create update]
   before_action :set_sub_kinds, only: %i[new edit create update]
   before_action :set_categories, only: %i[new edit create update]
-  before_action :set_departments, only: %i[new edit create update]
+  before_action :set_properties, only: %i[new edit create update]
   before_action :set_situations, only: %i[new edit create update]
 
   # GET /goods
@@ -107,8 +107,8 @@ class GoodsController < ApplicationController
     @categories = GoodSubKind.active.select(:id).map { |sk| [sk.id, sk.categories.active.map { |c| [c.description, c.id] }] }
   end
 
-  def set_departments
-    @departments = Department.all.map { |d| [d.description, d.id] }
+  def set_properties
+    @properties = Property.active.includes(:departments)
   end
 
   def set_situations

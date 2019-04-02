@@ -7,6 +7,7 @@ pt-BR:
       back: Voltar
       destroy: Excluir
       cancel: Cancelar
+      select: Selecionar
     confirm: Você tem certeza?
     active:
       true: Sim
