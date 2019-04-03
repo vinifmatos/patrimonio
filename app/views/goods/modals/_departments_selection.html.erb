@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal_departments" tabindex="-1" role="dialog" aria-labelledby="depatments" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">New message</h5>
@@ -8,24 +8,47 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="accordion" id="accordionExample">
-          <% properties.each do |property| %>
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                  <%= button_tag property.description, class: 'btn btn-link', type: :button, data: { toggle: :collapse, target: "#collapse_#{property.id}" }, aria: { expanded: true, controls: "collapse_#{property.id}"} %>
-                </h2>
-              </div>
-              <%= tag.div id: "collapse_#{property.id}", class: :collapse, data: { parent: '#accordionExample' } do %>
-                <% property.departments.each do |department| %>
-                  <div class="card-body">
-                    <%= department.description %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+        <table id="departments_table" class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Propriedade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% properties.each do |property| %>
+              <tr>
+                <td class="text-center" style="width: 30px;">
+                  <%= button_tag fa_icon('plus-square'), type: :button, class: 'btn btn-secondary btn-sm open' %>
+                </td>
+                <td><%= property.description %></td>
+              </tr>
+              <tr class="hide">
+                <td></td>
+                <td>
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th class="text-center" style="width: 25px;">#</th>
+                        <th>Departamento</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% property.departments.each do |department| %>
+                        <tr>
+                          <td class="text-center" style="width: 25px;">
+                            <%= check_box_tag :selected %>
+                          </td>
+                          <td><%= department.description %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -34,3 +57,30 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).on("click", "#departments_table .open", function() {
+      var tr = $(this).parents("tr").next();
+      if (tr.hasClass("hide")) {
+        $(this).html('<%= fa_icon("minus-square") %>')
+         tr.removeClass("hide");
+      } else {
+         tr.addClass("hide");
+         $(this).html('<%= fa_icon("plus-square") %>')
+      }
+  });
+  
+  $(document).on("change", "#departments_table input:checkbox", function() {
+    var row = $(this).parents("tr").first()
+    var main_row = $(row).parents('tr').prev()
+    if ($(this).is(":checked")) {
+      $("#departments_table .table-primary").removeClass("table-primary")
+      $("#departments_table input:checkbox").prop("checked", false)
+      $(this).prop("checked", true)
+      $(row).addClass("table-primary")
+      $(main_row).addClass("table-primary")
+    } else {
+      $(row).removeClass("table-primary")
+      $(main_row).removeClass("table-primary")
+    }
+   });
+</script>
