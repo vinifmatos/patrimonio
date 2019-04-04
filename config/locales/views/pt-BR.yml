@@ -8,6 +8,7 @@ pt-BR:
       destroy: Excluir
       cancel: Cancelar
       select: Selecionar
+      save: Salvar
     confirm: Você tem certeza?
     active:
       true: Sim

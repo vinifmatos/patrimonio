@@ -108,7 +108,7 @@ class GoodsController < ApplicationController
   end
 
   def set_properties
-    @properties = Property.active.includes(:departments)
+    @properties = Property.active.includes(:departments).order(:description)
   end
 
   def set_situations

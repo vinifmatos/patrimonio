@@ -7,12 +7,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body scroll">
         <table id="departments_table" class="table">
           <thead>
             <tr>
-              <th></th>
-              <th>Propriedade</th>
+              <th colspan="2">Propriedade</th>
             </tr>
           </thead>
           <tbody>
@@ -29,8 +28,7 @@
                   <table class="table table-sm">
                     <thead>
                       <tr>
-                        <th class="text-center" style="width: 25px;">#</th>
-                        <th>Departamento</th>
+                        <th colspan="2">Departamentos</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -51,8 +49,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <%= button_tag t('views.actions.save'), id: 'btn_save', type: :button, class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
