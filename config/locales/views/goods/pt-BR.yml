@@ -16,3 +16,5 @@ pt-BR:
           kind: Selecione o Tipo
           sub_kind: Selecione o Sub Tipo
           category: Selecione a categoria
+      department_select:
+        title: Selecione um Departamento
